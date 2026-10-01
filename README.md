@@ -6,6 +6,7 @@
 - Date and time
 - Location
 - Duration
+- Capacity
 
 ### Participants
 - Name
