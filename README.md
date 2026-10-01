@@ -11,8 +11,8 @@
 - Name
 
 ## Functionality
-### Event Creation
-- 
-
-### Waitlists
-- 
+- Create events
+- Capacity management
+- Waitlist management
+- Participant cancellation
+- Reporting and admin capabilities
