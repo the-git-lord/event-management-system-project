@@ -1,4 +1,5 @@
 #include <iostream>
+#include "events.hpp"
 
 int main() {
 	cout << "Hello world!" << endl;
