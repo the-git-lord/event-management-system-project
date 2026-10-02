@@ -2,7 +2,7 @@ class Event {
 private:
 	typedef struct Date {
 		int year;
-		string month;
+		int month;
 		int day;
 	} Date;
 
