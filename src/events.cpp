@@ -11,8 +11,9 @@ private:
 		int minute;
 	} Time;
 	
-	const string months[] = {"January", "February", "March", "April", "May",
-							 "June", "July", "August", "September", "October", "November", "December"};
+	const string months[] = {"January", "February", "March", "April",
+							 "May", "June", "July", "August",
+							 "September", "October", "November", "December"};
 
 private:
 	string name;
@@ -49,7 +50,7 @@ public:
 	string getTime() { return time; }
 	string getLocation() { return location; }
 	
-	string getDuration() {
+	// string getDuration() {
 		
-	}
+	// }
 }
