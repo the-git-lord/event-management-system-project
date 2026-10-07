@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "events.hpp"
-#include "ui.hpp"
+#include "include/events.hpp"
+#include "include/ui.hpp"
 
 int main() {
 	int user_type = 0;
