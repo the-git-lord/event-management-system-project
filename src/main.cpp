@@ -1,17 +1,18 @@
 #include <iostream>
 
-#include "include/events.hpp"
-#include "include/ui.hpp"
+#include "event.hpp"
 
 int main() {
-	int user_type = 0;
-	DisplayDashboard dashboard = new DisplayDashboard();
-	std::cout << "[1] Participant\t[2] Administrator" << std::endl;
-	std::cout << ": ";
-	std::cin >> user_type;
+	Event event = Event{};
+	event.setName("Test Event!");
+	// event.setDate(2026, 11, 31);
+	// event.setTime(23, 59);
+	// event.setLocation("McCormmack", "ISC");
 
-	dashboard.dashboard(user_type);
-	sleep(1000);
+	std::cout << event.getName() << std::endl;
+	// std::cout << event.getDate() << std::endl;
+	// std::cout << event.getTime() << std::endl;
+	// std::cout << event.getLocation() << std::endl;
 	
 	return 0;
 }
