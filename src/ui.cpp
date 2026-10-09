@@ -1,7 +1,11 @@
 #include <iostream>
 
-class DisplayDashboard {
-
+class Display {
+private:
+	const string months[] = {"January", "February", "March", "April",
+							 "May", "June", "July", "August",
+							 "September", "October", "November", "December"};
+	
 private:
 	void AdminDashboard() {
 		std::cout << "aaaaaaaaaaaaaaaaaaaa" << std::endl;
@@ -11,15 +15,39 @@ private:
 		std::cout << "bbbbbbbbbbbbbbbbbbbb" << std::endl;
 	}
 
-public:
-	DisplayDashboard() {
+private:
+	void printEventName(string name) {
+
 	}
 	
-	void dashboard(int user_type) {
-		if (user_type == 1) {
+	void printEventDate(Date date) {
+
+	}
+
+	void printEventTime(Time time) {
+		
+	}
+
+	void printEventLocation(Location location) {
+		
+	}
+	
+public:
+	Display() {
+	}
+	
+	void printDashboard(User user) {
+		if (dynamic_cast<Participant*>(user) != nullptr) {
 			ParticipantDashboard();
-		} else if (user_type == 2) {
+		} else if (dynamic_cast<Administrator*>(user) != nullptr) {
 			AdminDashboard();
 		}
 	}
-}
+	
+	void printEvent(Event event) {
+		printEventName(event.getName());
+		printEventDate(event.getDate());
+		printEventTime(event.getTime());
+		printEventLocation(event.getLocation());
+	}
+};
