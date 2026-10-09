@@ -1,6 +1,8 @@
 #ifndef EVENT
 #define EVENT
 
+#include <string>
+
 class Event {
 private:
 	typedef struct Date {
@@ -26,6 +28,8 @@ private:
 	Location location;
 
 public:
+	Event();
+	
 	void setName(std::string name);
 	void setDate(int year, int month, int day);
 	void setTime(int hour, int minute);

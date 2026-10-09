@@ -1,6 +1,8 @@
+#include <string>
+
 #include "event.hpp"
 
-Event::Event();
+Event::Event() {};
 
 void Event::setName(std::string name) {
 	this->name = name;
@@ -31,9 +33,10 @@ void Event::setLocation(std::string building, std::string room) {
 }
 	
 std::string Event::getName() { return this->name; }
-Date Event::getDate() { return this->date; }
-Time Event::getTime() { return this->time; }
-Location Event::getLocation() { return this->location; }
+Event::Date Event::getDate() { return this->date; }
+Event::Time Event::getTime() { return this->time; }
+Event::Location Event::getLocation() { return this->location; }
 	
-// string getDuration() {
-// }
+std::string getDuration() {
+	return "test";
+}

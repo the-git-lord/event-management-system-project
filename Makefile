@@ -1,22 +1,22 @@
-CC = g++
-FLAGS = -std=c++26 -Wall -Wextra -Werror -I ./headers
-OBJS = obj/main.o obj/events.o # ui.o user.o
+CC        = g++
+FLAGS     = -std=c++26 -Wall -Wextra -Werror -I ./headers
+OBJ_FILES = obj/main.o obj/event.o ui.o user.o
 
-build/app.exe: $(OBJS)
-	$(CC) -o app.exe $(OBJS) -g
+build: $(OBJ_FILES)
+	$(CC) -o build/app.exe $(OBJ_FILES) -g
 
-obj/events.o: src/events.cpp
-	$(CC) $(FLAGS) src/events.cpp
+main.o: src/main.cpp
+	$(CC) $(FLAGS) -c src/main.cpp -o obj/main.o
 
-# obj/ui.o: ui.cpp ui.hpp
-# 	$(CC) $(FLAGS) ui.cpp
+event.o: src/event.cpp headers/event.hpp
+	$(CC) $(FLAGS) -c src/event.cpp -o obj/event.o
 
-# obj/user.o: user.cpp user.hpp
-# 	$(CC) $(FLAGS) user.cpp
+ui.o: src/ui.cpp headers/ui.hpp
+	$(CC) $(FLAGS) -c src/ui.cpp
 
-obj/main.o: src/main.cpp
-	$(CC) $(FLAGS) src/main.cpp
+user.o: src/user.cpp headers/user.hpp
+	$(CC) $(FLAGS) src/user.cpp
 
 clean:
-	rm obj/*.o \ rm build/app.exe
+	rm obj/*.o
 
