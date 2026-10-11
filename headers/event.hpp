@@ -1,44 +1,44 @@
 #ifndef EVENT
 #define EVENT
 
+#include <ctime>
 #include <string>
+
+typedef struct Location {
+	std::string building;
+	std::string room;
+} Location;
 
 class Event {
 private:
-	typedef struct Date {
-		int year;
-		int month;
-		int day;
-	} Date;
-
-	typedef struct Time {
-		int hour;
-		int minute;
-	} Time;
-
-	typedef struct Location {
-		std::string building;
-		std::string room;
-	} Location;
-
-private:
 	std::string name;
-	Date date;
-	Time time;
+	unsigned int capacity;
+	struct tm *startTime;
+	struct tm *endTime;
 	Location location;
+	double duration;
 
 public:
 	Event();
 	
 	void setName(std::string name);
-	void setDate(int year, int month, int day);
-	void setTime(int hour, int minute);
+	void setCapacity(int capacity);
+	
+	void setStartTime(int minute, int hour, int day, int month, int year);
+	void setStartTime(struct tm* time);
+	
+	void setEndTime(int minute, int hour, int day, int month, int year);
+	void setEndTime(struct tm* time);
+	
 	void setLocation(std::string building, std::string room);
+	void setLocation(Location location);
 
 	std::string getName();
-	Date getDate();
-	Time getTime();
+	int getCapacity();
+	struct tm* getStartTime();
+	struct tm* getEndTime();
 	Location getLocation();
+	double getDurationDays();
 };
 
 #endif
