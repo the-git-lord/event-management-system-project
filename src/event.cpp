@@ -108,12 +108,12 @@ struct tm* Event::getEndTime() { return this->endTime; }
 Location Event::getLocation() { return this->location; }
 	
 double Event::getDurationDays() {
-	double seconds;
-	
-	if (endTime->tm_min + endTime->tm_hour + endTime->tm_mday + endTime->tm_mon + endTime->tm_year != 0) {
-		seconds = difftime(mktime(getEndTime()), mktime(getStartTime()));
-		this->duration = seconds / 60 / 60 / 365;
+	if (endTime->tm_min + endTime->tm_hour + endTime->tm_mday + endTime->tm_mon + endTime->tm_year == 0) {
+		return 0;
 	}
+
+	double seconds = difftime(mktime(getEndTime()), mktime(getStartTime()));
+	this->duration = seconds / 60 / 60 / 365;
 
 	return this->duration;
 }

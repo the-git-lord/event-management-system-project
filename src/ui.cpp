@@ -4,7 +4,14 @@
 #include "event.hpp"
 #include "ui.hpp"
 
-Display::Display() {}
+void Display::displayEvent(Event event) {
+	eventName(event);
+	eventCapacity(event);
+	eventStartTime(event);
+	eventEndTime(event);
+	eventDurationDays(event);
+	eventLocation(event);
+}
 
 void Display::eventName(Event event) {
 	std::cout << "Name: " << event.getName() << std::endl;
@@ -29,13 +36,4 @@ void Display::eventLocation(Event event) {
 
 void Display::eventDurationDays(Event event) {
 	std::cout << "Days: " << event.getDurationDays() << std::endl;
-}
-	
-void Display::displayEvent(Event event) {
-	eventName(event);
-	eventCapacity(event);
-	eventStartTime(event);
-	eventEndTime(event);
-	eventDurationDays(event);
-	eventLocation(event);
 }
