@@ -1,16 +1,19 @@
 #include <iostream>
 #include <ctime>
+#include <vector>
 
 #include "event.hpp"
 #include "ui.hpp"
 
-void Display::displayEvent(Event event) {
-	eventName(event);
-	eventCapacity(event);
-	eventStartTime(event);
-	eventEndTime(event);
-	eventDurationDays(event);
-	eventLocation(event);
+void Display::EventListTable(std::vector<Event> EventVector) {
+	for (Event curr : EventVector) {
+		eventName(curr);
+		eventCapacity(curr);
+		eventStartTime(curr);
+		eventEndTime(curr);
+		eventDurationDays(curr);
+		eventLocation(curr);
+	}
 }
 
 void Display::eventName(Event event) {

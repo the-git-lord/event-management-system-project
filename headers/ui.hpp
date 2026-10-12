@@ -2,7 +2,7 @@
 #define USER_INTERFACE
 
 namespace Display {
-	void displayEvent(Event event);
+	void EventListTable(Event event);
 	void eventName(Event event);
 	void eventCapacity(Event event);
 	void eventStartTime(Event event);

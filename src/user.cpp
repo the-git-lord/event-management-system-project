@@ -1,9 +1,11 @@
+#include <string>
+
 class User {
 protected:
-	string name;
+	std::string name;
 	
 public:
-	User(string name) {
+	User(std::string name) {
 		this->name = name;
 	}
 };
