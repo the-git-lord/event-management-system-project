@@ -2,8 +2,8 @@
 #define INPUT
 
 namespace UserInput {
-	void CreateEvent();
-	void EditEvent();
+	void CreateEvent(std::vector<Event>* EventVector);
+	// void EditEvent();
 }
 
 #endif

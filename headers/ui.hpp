@@ -2,7 +2,7 @@
 #define USER_INTERFACE
 
 namespace Display {
-	void EventListTable(Event event);
+	void EventListTable(std::vector<Event> EventVector);
 	void eventName(Event event);
 	void eventCapacity(Event event);
 	void eventStartTime(Event event);

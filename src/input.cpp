@@ -1,7 +1,9 @@
 #include <iostream>
+#include <vector>
+#include "event.hpp"
 #include "input.hpp"
 
-void UserInput::CreateEvent() {
+void UserInput::CreateEvent(std::vector<Event>* EventVector) {
 	Event event = Event();
 	std::string name;
 	int capacity;
@@ -30,9 +32,9 @@ void UserInput::CreateEvent() {
 	getline(std::cin, room);
 	event.setLocation(building, room);
 
-	EventsList.push_back(event);
+	EventVector->push_back(event);
 }
 
-void UserInput::EditEvent() {
+// void UserInput::EditEvent() {
 
-}
+// }

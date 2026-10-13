@@ -1,6 +1,6 @@
 CC        = g++
 CFLAGS     = -std=c++26 -Wall -Wextra -Werror -I ./headers
-OBJ_FILES = main.o event.o ui.o user.o
+OBJ_FILES = main.o event.o ui.o user.o input.o
 VPATH = src:headers:obj
 
 build: $(OBJ_FILES)
@@ -16,6 +16,9 @@ ui.o: ui.cpp ui.hpp
 	$(CC) $(CFLAGS) -c $< -o obj/$@
 
 user.o: user.cpp user.hpp
+	$(CC) $(CFLAGS) -c $< -o obj/$@
+
+input.o: input.cpp input.hpp
 	$(CC) $(CFLAGS) -c $< -o obj/$@
 
 .PHONY: clean

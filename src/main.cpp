@@ -4,6 +4,7 @@
 
 #include "event.hpp"
 #include "ui.hpp"
+#include "input.hpp"
 
 int main() {
 	std::vector<Event> EventsList = {};
@@ -22,15 +23,15 @@ int main() {
 
 		switch (option) {
 		case 1: {
-			Display::EventListTable();
+			Display::EventListTable(EventsList);
 			break;
 		}
 		case 2: {
-			UserInput::CreateEvent();
+			UserInput::CreateEvent(EventsList);
 			break;
 		}
 		case 3: {
-			UserInput::EditEvent();
+			//UserInput::EditEvent();
 			break;
 		}
 		case 9: {

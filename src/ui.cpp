@@ -6,6 +6,12 @@
 #include "ui.hpp"
 
 void Display::EventListTable(std::vector<Event> EventVector) {
+	std::cout << "| Event Name                             "; 
+	std::cout << "| Capacity ";
+	std::cout << "| Start Time          ";
+	std::cout << "| End Time            ";
+	std::cout << "| Location            ";
+	
 	for (Event curr : EventVector) {
 		eventName(curr);
 		eventCapacity(curr);
