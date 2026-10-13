@@ -23,15 +23,15 @@ int main() {
 
 		switch (option) {
 		case 1: {
-			Display::EventListTable(EventsList);
+			DisplayEvent::EventListTable(EventsList);
 			break;
 		}
 		case 2: {
-			UserInput::CreateEvent(EventsList);
+			EventEditInput::createEvent(EventsList);
 			break;
 		}
 		case 3: {
-			//UserInput::EditEvent();
+			EventEditInput::chooseEventToEdit(EventsList);
 			break;
 		}
 		case 9: {

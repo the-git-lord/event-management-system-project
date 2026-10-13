@@ -1,48 +1,61 @@
 #include <iostream>
 #include <ctime>
 #include <vector>
+#include <cstring>
 
 #include "event.hpp"
 #include "ui.hpp"
 
-void Display::EventListTable(std::vector<Event> EventVector) {
+void DisplayEvent::EventListTable(std::vector<Event> EventVector) {
+	DisplayEvent retrievers = DisplayEvent();
+	
 	std::cout << "| Event Name                             "; 
 	std::cout << "| Capacity ";
 	std::cout << "| Start Time          ";
 	std::cout << "| End Time            ";
-	std::cout << "| Location            ";
+	std::cout << "| Location                               |" << std::endl;
 	
 	for (Event curr : EventVector) {
-		eventName(curr);
-		eventCapacity(curr);
-		eventStartTime(curr);
-		eventEndTime(curr);
-		eventDurationDays(curr);
-		eventLocation(curr);
+		retrievers.name(curr);
+		std::cout << "\t";
+		retrievers.capacity(curr);
+		std::cout << "\t";
+		retrievers.startTime(curr);
+		std::cout << "\t";
+		retrievers.endTime(curr);
+		std::cout << "\t";
+		retrievers.durationDays(curr);
+		std::cout << "\t";
+		retrievers.location(curr);
+		std::cout << std::endl;
 	}
 }
 
-void Display::eventName(Event event) {
-	std::cout << "Name: " << event.getName() << std::endl;
+void DisplayEvent::name(Event event) {
+	std::cout << event.getName();
 }
 
-void Display::eventCapacity(Event event) {
-	std::cout << "Capacity: " << event.getCapacity() << std::endl;
+void DisplayEvent::capacity(Event event) {
+	std::cout << event.getCapacity();
 }
 
-void Display::eventStartTime(Event event) {
-	std::cout << "Start: " << asctime(event.getStartTime()) << std::endl;
+void DisplayEvent::startTime(Event event) {
+	char* formatted_time = asctime(event.getStartTime());
+	formatted_time[strlen(formatted_time) - 1] = '\0';
+	std::cout << formatted_time;
 }
 
-void Display::eventEndTime(Event event) {
-	std::cout << "End: " << asctime(event.getEndTime()) << std::endl;
+void DisplayEvent::endTime(Event event) {
+	char* formatted_time = asctime(event.getEndTime());
+	formatted_time[strlen(formatted_time) - 1] = '\0';
+	std::cout << formatted_time;
 }
 
-void Display::eventLocation(Event event) {
+void DisplayEvent::location(Event event) {
 	Location location = event.getLocation();
-	std::cout << location.building << " " << location.room << std::endl;
+	std::cout << location.building << " " << location.room;
 }
 
-void Display::eventDurationDays(Event event) {
-	std::cout << "Days: " << event.getDurationDays() << std::endl;
+void DisplayEvent::durationDays(Event event) {
+	std::cout << event.getDurationDays();
 }
