@@ -1,6 +1,9 @@
 #include <iostream>
 
+#include "event.hpp"
+
 int main() {
-	cout << "Hello world!" << endl;
+
+	
 	return 0;
 }
