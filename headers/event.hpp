@@ -3,6 +3,7 @@
 
 #include <ctime>
 #include <string>
+#include <vector>
 
 typedef struct Location {
 	std::string building;
@@ -11,6 +12,7 @@ typedef struct Location {
 
 class Event {
 private:
+	std::vector<std::string> participants;
 	std::string name;
 	unsigned int capacity;
 	struct tm *startTime;
@@ -20,6 +22,9 @@ private:
 
 public:
 	Event();
+	bool registerParticipant(std::string name);
+
+	std::vector<std::string> getParticipants() const;
 	
 	void setName(std::string name);
 	void setCapacity(int capacity);

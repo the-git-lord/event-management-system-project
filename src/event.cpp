@@ -2,7 +2,10 @@
 #include "event.hpp"
 
 Event::Event() {
-	this->startTime = (struct tm *)malloc(sizeof(struct tm));
+    // Start with 0 capacity until it is set
+    this->capacity = 0;
+
+    this->startTime = (struct tm *)malloc(sizeof(struct tm));
 
 	if (this->startTime == NULL) {
 		std::cout << "Failed to allocate memory for startTime struct" << std::endl;
@@ -116,4 +119,27 @@ double Event::getDurationDays() {
 	}
 
 	return this->duration;
+}
+// This function lets a participant sign up for an event
+bool Event::registerParticipant(std::string name) {
+
+    // Check if the name is empty
+    if (name.empty()) {
+        return false;
+    }
+
+    // Check if the event is full
+    if (participants.size() >= capacity) {
+        return false;
+    }
+
+    // Add the participant's name to the list
+    participants.push_back(name);
+
+    return true;
+}
+
+// Return the list of registered participants
+std::vector<std::string> Event::getParticipants() const {
+    return participants;
 }
