@@ -20,3 +20,7 @@ event.o: src/event.cpp headers/event.hpp
 clean:
 	rm obj/*.o
 
+test_admin: test/unittest_admin/ut_admin.cpp src/admin.cpp src/user.cpp src/event.cpp
+	mkdir -p build
+	$(CC) $(FLAGS) test/unittest_admin/ut_admin.cpp src/admin.cpp src/user.cpp src/event.cpp -o build/test_admin.exe
+	./build/test_admin.exe
