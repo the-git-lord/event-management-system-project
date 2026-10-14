@@ -1,25 +1,45 @@
 #include <iostream>
 #include <string>
+#include <vector>
+
 #include "event.hpp"
+#include "ui.hpp"
+#include "input.hpp"
 
 int main() {
-    Event event;
+	std::vector<Event> EventsList = {};
 
-    event.setName("CS410 Workshop");
-    event.setCapacity(2);
+	while (true) {
+		int option = -1;
+		
+		std::cout << "[1] Display Events" << std::endl;
+		std::cout << "[2] Create Event" << std::endl;
+		std::cout << "[3] Edit Event" << std::endl;
+		std::cout << "[9] Exit" << std::endl;
+		std::cout << std::endl;
+		std::cout << "Command: ";
+		std::cin >> option;
+		std::cin.ignore();
 
-    std::string name;
-
-    std::cout << "Enter your name: ";
-    std::getline(std::cin, name);
-
-    if (event.registerParticipant(name)) {
-        std::cout << "You have successfully signed up!"
-                  << std::endl;
-    } else {
-        std::cout << "Signup failed."
-                  << std::endl;
-    }
-
-    return 0;
+		switch (option) {
+		case 1: {
+			DisplayEvent::EventListTable(EventsList);
+			break;
+		}
+		case 2: {
+			EventEditInput::createEvent(EventsList);
+			break;
+		}
+		case 3: {
+			EventEditInput::chooseEventToEdit(EventsList);
+			break;
+		}
+		case 9: {
+			std::cout << "Exiting" << std::endl;
+			return 0;
+		}
+		}
+	}
+	
+	return 0;
 }

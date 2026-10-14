@@ -10,12 +10,14 @@ Event::Event() {
 	if (this->startTime == NULL) {
 		std::cout << "Failed to allocate memory for startTime struct" << std::endl;
 	}
-	
+
+	this->startTime->tm_sec = 0;
 	this->startTime->tm_min = 0;
 	this->startTime->tm_hour = 0;
 	this->startTime->tm_mday = 0;
 	this->startTime->tm_mon = 0;
 	this->startTime->tm_year = 0;
+	this->startTime->tm_isdst = 0;
 	
 	this->endTime = (struct tm *)malloc(sizeof(struct tm));
 
@@ -23,13 +25,40 @@ Event::Event() {
 		std::cout << "Failed to allocate memory for endTime struct" << std::endl;
 	}
 
+	this->endTime->tm_sec = 0;
 	this->endTime->tm_min = 0;
 	this->endTime->tm_hour = 0;
 	this->endTime->tm_mday = 0;
 	this->endTime->tm_mon = 0;
 	this->endTime->tm_year = 0;
+	this->endTime->tm_isdst = 0;
 	
 	this->duration = 0.0;
+}
+
+void Event::setMinute(struct tm *time, int minute) {
+	if (minute >= 0 && minute <= 59)
+		time->tm_min = minute;
+}
+
+void Event::setHour(struct tm *time, int hour) {
+	if (hour >= 0 && hour <= 23)
+		time->tm_hour = hour;
+}
+
+void Event::setDay(struct tm *time, int day) {
+	if (day >= 1 && day <= 31)
+		time->tm_mday = day;
+}
+
+void Event::setMonth(struct tm *time, int month) {
+	if (month >= 1 && month <= 12)
+		time->tm_mon = month;	
+}
+
+void Event::setYear(struct tm *time, int year) {
+	if (year >= 1900)
+		time->tm_year = year - 1900;
 }
 
 void Event::setName(std::string name) {
@@ -46,12 +75,12 @@ void Event::setStartTime(int minute, int hour, int day, int month, int year) {
 		std::cout << "startTime is NULL" << std::endl;
 		return;
 	}
-	
-	startTime->tm_min = minute;
-	startTime->tm_hour = hour;
-	startTime->tm_mday = day;
-	startTime->tm_mon = month;
-	startTime->tm_year = year - 1900;
+
+	setMinute(this->startTime, minute);
+	setHour(this->startTime, hour);
+	setDay(this->startTime, day);
+	setMonth(this->startTime, month);
+	setYear(this->startTime, year);
 }
 
 void Event::setStartTime(struct tm* time) {
@@ -74,11 +103,11 @@ void Event::setEndTime(int minute, int hour, int day, int month, int year) {
 		return;
 	}
 	
-	endTime->tm_min = minute;
-	endTime->tm_hour = hour;
-	endTime->tm_mday = day;
-	endTime->tm_mon = month;
-	endTime->tm_year = year - 1900;
+	setMinute(this->endTime, minute);
+	setHour(this->endTime, hour);
+	setDay(this->endTime, day);
+	setMonth(this->endTime, month);
+	setYear(this->endTime, year);
 }
 
 void Event::setEndTime(struct tm* time) {
@@ -109,14 +138,14 @@ int Event::getCapacity() { return this->capacity; }
 struct tm* Event::getStartTime() { return this->startTime; }
 struct tm* Event::getEndTime() { return this->endTime; }
 Location Event::getLocation() { return this->location; }
-	
+
 double Event::getDurationDays() {
-	double seconds;
-	
-	if (endTime->tm_min + endTime->tm_hour + endTime->tm_mday + endTime->tm_mon + endTime->tm_year != 0) {
-		seconds = difftime(mktime(getEndTime()), mktime(getStartTime()));
-		this->duration = seconds / 60 / 60 / 365;
+	if (endTime->tm_min + endTime->tm_hour + endTime->tm_mday + endTime->tm_mon + endTime->tm_year == 0) {
+		return 0;
 	}
+
+	double seconds = difftime(mktime(getEndTime()), mktime(getStartTime()));
+	this->duration = seconds / 60 / 60 / 365;
 
 	return this->duration;
 }
