@@ -1,42 +1,52 @@
-
 #include "../headers/Waitlist.h"
 #include <iostream>
-
-using namespace std;
+#include <string>
 
 int main() {
     Waitlist waitlist;
     int choice = 0;
-    string name;
+    std::string name;
 
-    while (choice != 3) {
-        cout << "=== Waitlist Menu ===" << endl;
-        cout << "1. Add Participant" << endl;
-        cout << "2. View Waitlist" << endl;
-        cout << "3. Exit" << endl;
-        cout << "Enter your choice: ";
-        cin >> choice;
+    while (choice != 4) {
+        std::cout << "=== Waitlist Menu ===" << std::endl;
+        std::cout << "1. Add Participant" << std::endl;
+        std::cout << "2. View Waitlist" << std::endl;
+        std::cout << "3. Remove Participant" << std::endl;
+        std::cout << "4. Exit" << std::endl;
+        std::cout << "Enter your choice: ";
+        std::cin >> choice;
 
-        if (!cin) {
-            cout << "Please enter a number." << endl;
+        if (!std::cin) {
+            std::cout << "Please enter a number." << std::endl;
             break;
         }
 
         if (choice == 1) {
-            cout << "Enter participant name: ";
-            cin >> name;
+            std::cout << "Enter participant name: ";
+            std::cin >> name;
 
             waitlist.addParticipant(name);
-            cout << name << " was added!" << endl;
+            std::cout << name << " was added!" << std::endl;
         }
         else if (choice == 2) {
             waitlist.viewParticipants();
         }
         else if (choice == 3) {
-            cout << "Goodbye!" << endl;
+            std::cout << "Enter participant name to remove: ";
+            std::cin >> name;
+
+            if (waitlist.removeParticipant(name)) {
+                std::cout << name << " was removed!" << std::endl;
+            }
+            else {
+                std::cout << "Participant not found." << std::endl;
+            }
+        }
+        else if (choice == 4) {
+            std::cout << "Goodbye!" << std::endl;
         }
         else {
-            cout << "Invalid choice." << endl;
+            std::cout << "Invalid choice." << std::endl;
         }
     }
 
