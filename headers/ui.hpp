@@ -11,9 +11,12 @@ private:
 	void startTime(Event event);
 	void endTime(Event event);
 	void location(Event event);
-	void durationDays(Event event);	
+	void durationDays(Event event);
+
+	void printTableColumnTitles();
 public:
 	static void EventListTable(std::vector<Event> EventVector);
+	static void EventEntry(Event event);
 };
 
 #endif

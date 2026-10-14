@@ -89,6 +89,7 @@ void EventEditInput::editEvent(Event& event) {
 		std::cout << "Command: ";
 
 		std::cin >> option;
+		std::cin.ignore();
 
 		switch (option) {
 		case 1:

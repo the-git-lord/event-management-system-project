@@ -18,6 +18,13 @@ private:
 	Location location;
 	double duration;
 
+private:
+	void setMinute(struct tm *time, int minute);
+	void setHour(struct tm *time, int hour);
+	void setDay(struct tm *time, int day);
+	void setMonth(struct tm *time, int month);
+	void setYear(struct tm *time, int year);
+
 public:
 	Event();
 	

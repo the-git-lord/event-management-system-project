@@ -7,28 +7,29 @@
 #include "ui.hpp"
 
 void DisplayEvent::EventListTable(std::vector<Event> EventVector) {
-	DisplayEvent retrievers = DisplayEvent();
-	
-	std::cout << "| Event Name                             "; 
-	std::cout << "| Capacity ";
-	std::cout << "| Start Time          ";
-	std::cout << "| End Time            ";
-	std::cout << "| Location                               |" << std::endl;
+	DisplayEvent title = DisplayEvent();
+	title.printTableColumnTitles();
 	
 	for (Event curr : EventVector) {
-		retrievers.name(curr);
-		std::cout << "\t";
-		retrievers.capacity(curr);
-		std::cout << "\t";
-		retrievers.startTime(curr);
-		std::cout << "\t";
-		retrievers.endTime(curr);
-		std::cout << "\t";
-		retrievers.durationDays(curr);
-		std::cout << "\t";
-		retrievers.location(curr);
-		std::cout << std::endl;
+		EventEntry(curr);
 	}
+}
+
+void DisplayEvent::EventEntry(Event event) {
+	DisplayEvent retrievers = DisplayEvent();
+	
+	retrievers.name(event);
+	std::cout << "\t";
+	retrievers.capacity(event);
+	std::cout << "\t";
+	retrievers.startTime(event);
+	std::cout << "\t";
+	retrievers.endTime(event);
+	std::cout << "\t";
+	retrievers.durationDays(event);
+	std::cout << "\t";
+	retrievers.location(event);
+	std::cout << std::endl;	
 }
 
 void DisplayEvent::name(Event event) {
@@ -40,13 +41,15 @@ void DisplayEvent::capacity(Event event) {
 }
 
 void DisplayEvent::startTime(Event event) {
-	char* formatted_time = asctime(event.getStartTime());
+	time_t mktime_var = mktime(event.getStartTime());
+	char* formatted_time = ctime(&mktime_var);
 	formatted_time[strlen(formatted_time) - 1] = '\0';
 	std::cout << formatted_time;
 }
 
 void DisplayEvent::endTime(Event event) {
-	char* formatted_time = asctime(event.getEndTime());
+	time_t mktime_var = mktime(event.getEndTime());
+	char* formatted_time = ctime(&mktime_var);
 	formatted_time[strlen(formatted_time) - 1] = '\0';
 	std::cout << formatted_time;
 }
@@ -58,4 +61,12 @@ void DisplayEvent::location(Event event) {
 
 void DisplayEvent::durationDays(Event event) {
 	std::cout << event.getDurationDays();
+}
+
+void DisplayEvent::printTableColumnTitles() {
+	std::cout << "| Event Name                             "; 
+	std::cout << "| Capacity ";
+	std::cout << "| Start Time          ";
+	std::cout << "| End Time            ";
+	std::cout << "| Location                               |" << std::endl;
 }
