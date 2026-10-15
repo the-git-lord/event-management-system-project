@@ -67,3 +67,13 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# macOS build outputs
+src/main
+src/output/
+*.dSYM/
+admin_test
+
+# Editor / OS files
+.vscode/
+.DS_Store

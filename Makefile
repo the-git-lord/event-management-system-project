@@ -1,19 +1,34 @@
-CC = g++
-FLAGS = -Wall -Wextra -Werror
-OBJS = main.o events.o ui.o
+CC        = g++
+CFLAGS     = -std=c++26 -Wall -Wextra -Werror -I ./headers
+OBJ_FILES = main.o event.o ui.o user.o input.o waitlist.o
+VPATH = src:headers:obj
 
-build/events: $(OBJS)
-	$(CC) -o $(OBJS) -g
+# $< refers to the first prerequisite of a rule
+# $@ refers to the target of a rule
+# VPATH helps make know where to look for the needed files
 
-obj/events.o: events.cpp events.hpp
-	$(CC) $(FLAGS) events.cpp
+build: $(OBJ_FILES)
+	$(CC) -o build/app.exe obj/main.o obj/event.o obj/user.o -g
 
-obj/ui.o: ui.cpp ui.hpp
-	$(CC) $(FLAGS) ui.cpp
+main.o: main.cpp
+	$(CC) $(CFLAGS) -c $< -o obj/$@
 
-obj/main.o: main.cpp
-	$(CC) $(FLAGS) main.cpp
+event.o: event.cpp event.hpp
+	$(CC) $(CFLAGS) -c $< -o obj/$@
 
+ui.o: ui.cpp ui.hpp
+	$(CC) $(CFLAGS) -c $< -o obj/$@
+
+user.o: user.cpp user.hpp
+	$(CC) $(CFLAGS) -c $< -o obj/$@
+
+input.o: input.cpp input.hpp
+	$(CC) $(CFLAGS) -c $< -o obj/$@
+
+waitlist.o: waitlist.cpp waitlist.hpp
+	$(CC) $(CFLAGS) -c $< -o obj/$@
+
+.PHONY: clean
 clean:
-	rm *.o
+	rm obj/*.o
 
