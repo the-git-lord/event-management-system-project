@@ -1,6 +1,7 @@
-#include "../headers/Waitlist.h"
 #include <iostream>
 #include <string>
+
+#include "../headers/waitlist.hpp"
 
 int main() {
     Waitlist waitlist;
