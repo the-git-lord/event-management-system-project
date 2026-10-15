@@ -21,6 +21,9 @@ user.o: user.cpp user.hpp
 input.o: input.cpp input.hpp
 	$(CC) $(CFLAGS) -c $< -o obj/$@
 
+waitlist.o: waitlist.cpp waitlist.hpp
+	$(CC) $(CFLAGS) -c $< -o obj/$@
+
 .PHONY: clean
 clean:
 	rm obj/*.o
