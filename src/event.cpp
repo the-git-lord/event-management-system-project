@@ -149,19 +149,7 @@ double Event::getDurationDays() {
 
 	return this->duration;
 }
-bool Event::registerParticipant(std::string name) {
-    if (name.empty()) {
-        return false;
-    }
 
-    if (participants.size() >= capacity) {
-        return false;
-    }
-
-    participants.push_back(name);
-
-    return true;
-}
 
 std::vector<std::string> Event::getParticipants() const {
     return participants;

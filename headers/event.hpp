@@ -10,7 +10,9 @@ typedef struct Location {
 	std::string room;
 } Location;
 
-class Event {
+class User;
+class Event { 
+	friend class User;
 private:
 	std::vector<std::string> participants;
 	std::string name;
@@ -29,7 +31,6 @@ private:
 
 public:
 	Event();
-	bool registerParticipant(std::string name);
 
 	std::vector<std::string> getParticipants() const;
 	

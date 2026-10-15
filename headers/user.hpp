@@ -3,6 +3,8 @@
 
 #include <string>
 
+class Event;
+
 class User {
 protected:
     std::string name;
@@ -11,6 +13,7 @@ public:
     User(std::string name);
 
     std::string getName() const;
+    bool registerParticipant(Event& event);
 };
 
 class Participant : public User {
@@ -23,4 +26,4 @@ public:
     Administrator(std::string name);
 };
 
-#endif 
+#endif
