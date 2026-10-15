@@ -4,7 +4,7 @@ OBJ_FILES = main.o event.o ui.o user.o input.o
 VPATH = src:headers:obj
 
 build: $(OBJ_FILES)
-	$(CC) -o build/app.exe ./obj/*.o -g
+	$(CC) -o build/app.exe obj/main.o obj/event.o obj/user.o -g
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) -c $< -o obj/$@

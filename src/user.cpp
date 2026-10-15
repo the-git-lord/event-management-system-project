@@ -1,14 +1,17 @@
-#include <string>
+#include "user.hpp"
 
-class User {
-protected:
-	std::string name;
-	
-public:
-	User(std::string name) {
-		this->name = name;
-	}
-};
+User::User(std::string name) {
+    this->name = name;
+}
 
-class Participant: public User {};
-class Administrator: public User {};
+std::string User::getName() const {
+    return name;
+}
+
+Participant::Participant(std::string name)
+    : User(name) {
+}
+
+Administrator::Administrator(std::string name)
+    : User(name) {
+}
