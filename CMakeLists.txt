@@ -24,12 +24,12 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-add_executable(EventManager)
-target_sources(EventManager
+add_executable(runapp)
+target_sources(runapp
   PRIVATE ${SOURCE_FILES}
 )
 
-target_include_directories(EventManager
+target_include_directories(runapp
   PUBLIC
   headers
 )
