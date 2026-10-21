@@ -38,24 +38,4 @@ public:
     Participant(std::string name, std::string username, std::string password);
 };
 
-class User {
-protected:
-    std::string name;
-
-public:
-    User(std::string name);
-
-    std::string getName() const;
-};
-
-class Participant : public User {
-public:
-    Participant(std::string name);
-};
-
-class Administrator : public User {
-public:
-    Administrator(std::string name);
-};
-
 #endif 

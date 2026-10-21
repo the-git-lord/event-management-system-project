@@ -4,7 +4,7 @@
 
 class Waitlist {
 private:
-    vector<string> participants;
+	std::vector<std::string> participants;
 
 public:
     void addParticipant(const std::string& name);
