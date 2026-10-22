@@ -3,15 +3,6 @@
 Administrator::Administrator(std::string name, std::string username, std::string password)
     : User(name, username, password, Role::ADMINISTRATOR) {}
 
-Event* Administrator::findEvent(std::vector<Event>& events, std::string eventName) {
-    for (Event& event : events) {
-        if (event.getName() == eventName) {
-            return &event;
-        }
-    }
-    return nullptr;
-}
-
 bool Administrator::createEvent(std::vector<Event>& events, Event event) {
     if (!hasAdminPrivileges()) 
         return false;
@@ -57,4 +48,13 @@ bool Administrator::updateEventCapacity(std::vector<Event>& events, std::string 
     // and move people off the waitlist if capacity increases.
     event->setCapacity(capacity);
     return true;
+}
+
+Event* Administrator::findEvent(std::vector<Event>& events, std::string eventName) {
+    for (Event& event : events) {
+        if (event.getName() == eventName) {
+            return &event;
+        }
+    }
+    return nullptr;
 }

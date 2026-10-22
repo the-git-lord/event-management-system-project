@@ -1,4 +1,4 @@
-#include "../headers/Waitlist.h"
+#include "waitlist.hpp"
 #include <iostream>
 
 void Waitlist::addParticipant(const std::string& name) {
@@ -11,13 +11,13 @@ void Waitlist::viewParticipants() const {
         return;
     }
 
-    for (int i = 0; i < participants.size(); i++) {
+    for (std::size_t i = 0; i < participants.size(); i++) {
         std::cout << i + 1 << ". " << participants[i] << std::endl;
     }
 }
 
 bool Waitlist::removeParticipant(const std::string& name) {
-    for (int i = 0; i < participants.size(); i++) {
+    for (std::size_t i = 0; i < participants.size(); i++) {
         if (participants[i] == name) {
             participants.erase(participants.begin() + i);
             return true;
