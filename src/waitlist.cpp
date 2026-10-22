@@ -1,4 +1,4 @@
-#include "../headers/waitlist.hpp"
+#include "waitlist.hpp"
 #include <iostream>
 
 void Waitlist::addParticipant(const std::string& name) {

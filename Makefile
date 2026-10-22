@@ -8,7 +8,7 @@ VPATH = src:headers:obj
 # VPATH helps make know where to look for the needed files
 
 build: $(OBJ_FILES)
-	$(CC) -o build/app.exe obj/main.o obj/event.o obj/user.o -g
+	$(CC) -o build/app.exe obj/main.o obj/event.o obj/user.o obj/input.o obj/waitlist.o obj/ui.o -g
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) -c $< -o obj/$@
