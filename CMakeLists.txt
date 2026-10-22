@@ -15,3 +15,9 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 endif()
 
 add_subdirectory(src)
+
+enable_testing()
+# add_subdirectory(test/unittest_admin)
+add_subdirectory(test/unittest_event)
+# add_subdirectory(test/unittest_participant)
+# add_subdirectory(test/unittest_waitlist)

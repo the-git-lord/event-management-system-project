@@ -1,4 +1,10 @@
-add_executable(TestEvent ut_event.cpp)
-target_link_libraries(TestEvent
-  ${EVENT_MANAGER_SOURCE_DIR}/src
+include(GoogleTest)
+
+add_executable(TestEventCreation testEventCreation.cpp)
+target_link_libraries(TestEventCreation
+  PRIVATE
+  Event
+  GTest::gtest_main
 )
+
+gtest_discover_tests(TestEventCreation)
