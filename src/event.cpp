@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "event.hpp"
 
 Event::Event() {
