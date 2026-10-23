@@ -3,6 +3,8 @@ project(EventManager)
 
 set(CMAKE_CXX_STANDARD 26)
 
+include(CTest)
+
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -16,7 +18,6 @@ endif()
 
 add_subdirectory(src)
 
-enable_testing()
 # add_subdirectory(test/unittest_admin)
 add_subdirectory(test/unittest_event)
 # add_subdirectory(test/unittest_participant)

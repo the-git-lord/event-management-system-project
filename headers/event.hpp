@@ -32,9 +32,7 @@ private:
 
 public:
 	Event();
-	bool registerParticipant(std::string name);
-
-	std::vector<std::string> getParticipants() const;
+	bool registerParticipant(User name);
 	
 	void setName(std::string name);
 	void setCapacity(int capacity);
@@ -48,6 +46,7 @@ public:
 	void setLocation(std::string building, std::string room);
 	void setLocation(Location location);
 
+	std::vector<User> getParticipants() const;
 	std::string getName();
 	int getCapacity();
 	struct tm* getStartTime();
