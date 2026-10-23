@@ -18,13 +18,3 @@ target_link_libraries(TestEventUserRegistration
 include(GoogleTest)
 gtest_discover_tests(TestEventCreation)
 gtest_discover_tests(TestEventUserRegistration)
-
-add_test(
-  NAME TestEventCreation
-  COMMAND TestEventCreation
-)
-
-add_test(
-  NAME TestEventUserRegistration
-  COMMAND TestEventUserRegistration
-)

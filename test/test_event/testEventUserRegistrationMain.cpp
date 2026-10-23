@@ -22,7 +22,7 @@ TEST(TestEventUserRegistration, WithInCapacity) {
 	ASSERT_TRUE(event.registerParticipant(user2));
 }
 
-int main() {
-	testing::InitGoogleTest();
+int main(int argc, char **argv) {
+	testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
 }
