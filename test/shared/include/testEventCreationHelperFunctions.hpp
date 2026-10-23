@@ -6,5 +6,6 @@
 Event createEventOutOfBounds();
 Event createValidEvent();
 Event createValidEventCopy(Event& event);
+Event createEventOneCapacity();
 
 #endif

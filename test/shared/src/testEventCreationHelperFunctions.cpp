@@ -36,3 +36,9 @@ Event createValidEventCopy(Event& event) {
 
 	return copy;
 }
+
+Event createValidEventOneCapacity() {
+	Event event = createValidEvent();
+	event.setCapacity(1);
+	return event;
+}
