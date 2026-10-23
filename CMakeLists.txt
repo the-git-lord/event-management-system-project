@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.23)
 project(EventManager)
 
 set(CMAKE_CXX_STANDARD 26)
+set(PROJECT_HEADERS ${PROJECT_SOURCE_DIR}/headers)
 
 include(CTest)
 
@@ -17,9 +18,4 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 endif()
 
 add_subdirectory(src)
-
-enable_testing()
-# add_subdirectory(test/unittest_admin)
-add_subdirectory(test/unittest_event)
-# add_subdirectory(test/unittest_participant)
-# add_subdirectory(test/unittest_waitlist)
+add_subdirectory(test)

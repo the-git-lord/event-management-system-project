@@ -5,7 +5,7 @@
 #include "testEventCreationHelperFunctions.hpp"
 
 TEST(TestEventUserRegistration, OverCapacity) {
-	Event event = createEventOneCapacity();
+	Event event = createValidEventOneCapacity();
 	Participant user1 = Participant("Steve", "steve001", "1234");
 	Participant user2 = Participant("John", "john025", "5678");
 
@@ -23,5 +23,6 @@ TEST(TestEventUserRegistration, WithInCapacity) {
 }
 
 int main() {
+	testing::InitGoogleTest();
 	return RUN_ALL_TESTS();
 }
