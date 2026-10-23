@@ -1,4 +1,4 @@
-enable_testing()
+include(GoogleTest)
 
 add_library(testEventCreationHelperFunctions testEventCreationHelperFunctions.cpp)
 target_link_libraries(testEventCreationHelperFunctions
@@ -29,5 +29,4 @@ target_link_libraries(TestEventCreation
   GTest::gtest_main
 )
 
-include(GoogleTest)
 gtest_discover_tests(TestEventCreation)

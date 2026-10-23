@@ -1,5 +1,24 @@
 #include "testEventCheckHelperFunctions.hpp"
 
+bool checkEventEqual(Event& event1, Event& event2) {
+	if (!checkNameEqual(event1, event2))
+		return false;
+	
+	if (!checkCapacityEqual(event1, event2))
+		return false;
+	
+	if (!checkStartTimeEqual(event1, event2))
+		return false;
+	
+	if (!checkEndTimeEqual(event1, event2))
+		return false;
+	
+	if (!checkLocationEqual(event1, event2))
+		return false;
+
+	return true;
+}
+
 bool checkNameEqual(Event& event1, Event& event2) {
 	std::string event1_name = event1.getName();
 	std::string event2_name = event2.getName();
@@ -20,12 +39,16 @@ bool checkStartTimeEqual(Event& event1, Event& event2) {
 
 	if (event1_startTime->tm_min != event2_startTime->tm_min)
 		return false;
+	
 	if (event1_startTime->tm_hour != event2_startTime->tm_hour)
 		return false;
+	
 	if (event1_startTime->tm_mday != event2_startTime->tm_mday)
 		return false;
+	
 	if (event1_startTime->tm_mon != event2_startTime->tm_mon)
 		return false;
+	
 	if (event1_startTime->tm_year != event2_startTime->tm_year)
 		return false;
 
@@ -65,6 +88,29 @@ bool checkLocationEqual(Event& event1, Event& event2) {
 		return false;
 
 	if (event1_location.room.compare(event2_location.room) != 0)
+		return false;
+
+	return true;
+}
+
+bool checkCapacityIsDefault(Event& event) {
+	return (event.getCapacity() == 0);
+}
+
+bool checkTimeEqualDefault(struct tm *time) {
+	if (time->tm_min != 0)
+		return false;
+	
+	if (time->tm_hour != 0)
+		return false;
+	
+	if (time->tm_mday != 0)
+		return false;
+	
+	if (time->tm_mon != 0)
+		return false;
+	
+	if (time->tm_year != 0)
 		return false;
 
 	return true;

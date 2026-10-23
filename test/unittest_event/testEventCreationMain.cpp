@@ -1,4 +1,3 @@
-#include <iostream>
 #include <vector>
 #include <gtest/gtest.h>
 
@@ -6,7 +5,7 @@
 #include "testEventCreationHelperFunctions.hpp"
 #include "testEventCheckHelperFunctions.hpp"
 
-TEST(TestEvent, EventParameterBoundaries) {
+TEST(TestEventCreation, EventTimeParameterBoundaries) {
 	Event event = Event();
 	struct tm *startTime = (struct tm *)malloc(sizeof(struct tm));
 	struct tm *endTime = (struct tm *)malloc(sizeof(struct tm));
@@ -15,32 +14,19 @@ TEST(TestEvent, EventParameterBoundaries) {
 	startTime = event.getStartTime();
 	endTime = event.getEndTime();
 
-	ASSERT_EQ(event.getCapacity(), 0);
-	ASSERT_EQ(startTime->tm_min, 0);
-	ASSERT_EQ(startTime->tm_hour, 0);
-	ASSERT_EQ(startTime->tm_mday, 0);
-	ASSERT_EQ(startTime->tm_mon, 0);
-	ASSERT_EQ(startTime->tm_year, 0);
-
-	ASSERT_EQ(endTime->tm_min, 0);
-	ASSERT_EQ(endTime->tm_hour, 0);
-	ASSERT_EQ(endTime->tm_mday, 0);
-	ASSERT_EQ(endTime->tm_mon, 0);
-	ASSERT_EQ(endTime->tm_year, 0);
+	ASSERT_TRUE(checkCapacityIsDefault(event));
+	ASSERT_TRUE(checkTimeEqualDefault(startTime));
+	ASSERT_TRUE(checkTimeEqualDefault(endTime));
 }
 
-TEST(TestEvent, EventSettersAndGetters) {
+TEST(TestEventCreation, EventSettersAndGetters) {
 	Event event = Event();
 	Event temp = Event();
 
 	event = createValidEvent();
 	temp = createValidEventCopy(event);
 	
-	ASSERT_TRUE(checkNameEqual(event, temp));
-	ASSERT_TRUE(checkCapacityEqual(event, temp));
-	ASSERT_TRUE(checkStartTimeEqual(event, temp));
-	ASSERT_TRUE(checkEndTimeEqual(event, temp));
-	ASSERT_TRUE(checkLocationEqual(event, temp));
+	ASSERT_TRUE(checkEventEqual(event, temp));
 }
 
 int main() {

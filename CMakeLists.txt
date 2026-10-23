@@ -18,6 +18,7 @@ endif()
 
 add_subdirectory(src)
 
+enable_testing()
 # add_subdirectory(test/unittest_admin)
 add_subdirectory(test/unittest_event)
 # add_subdirectory(test/unittest_participant)
