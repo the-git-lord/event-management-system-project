@@ -33,7 +33,7 @@ private:
 
 public:
 	Event();
-	bool registerParticipant(User name);
+	void registerParticipant(User name);
 	
 	void setName(std::string name);
 	void setCapacity(int capacity);

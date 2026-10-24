@@ -2,6 +2,7 @@ add_library(Event event.cpp)
 target_link_libraries(Event
   PRIVATE
   User
+  Waitlist
 )
 target_include_directories(Event
   PUBLIC

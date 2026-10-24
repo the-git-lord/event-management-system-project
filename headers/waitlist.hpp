@@ -9,9 +9,11 @@ private:
 	std::vector<User> participants;
 
 public:
-    void addParticipant(const std::string& name);
+	Waitlist();
+	
+    void addParticipant(const User name);
     void viewParticipants() const;
-    bool removeParticipant(const std::string& name);
+    bool removeParticipant(const User name);
     bool hasParticipants() const;
 	std::string getNextParticipant() const;
     int getSize() const;

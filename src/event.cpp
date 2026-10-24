@@ -36,14 +36,12 @@ Event::Event() {
 	this->duration = 0.0;
 }
 
-bool Event::registerParticipant(User name) {
+void Event::registerParticipant(User name) {
     if (participants.size() >= capacity) {
         return false;
     }
 
     participants.push_back(name);
-
-    return true;
 }
 
 void Event::setMinute(struct tm *time, int minute) {
