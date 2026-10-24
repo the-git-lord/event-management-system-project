@@ -14,13 +14,13 @@ void Waitlist::viewParticipants() const {
     }
 
     for (std::size_t i = 0; i < participants.size(); i++) {
-        std::cout << i + 1 << ". " << participants[i] << std::endl;
+        std::cout << i + 1 << ". " << participants[i].getName() << std::endl;
     }
 }
 
 bool Waitlist::removeParticipant(const User name) {
     for (std::size_t i = 0; i < participants.size(); i++) {
-        if (participants[i] == name) {
+        if (participants[i].getName() == name.getName()) {
             participants.erase(participants.begin() + i);
             return true;
         }
@@ -33,9 +33,10 @@ bool Waitlist::hasParticipants() const {
     return !participants.empty();
 }
 
-std::string Waitlist::getNextParticipant() const {
+User Waitlist::getNextParticipant() const {
     if (participants.empty()) {
-        return "";
+		Participant blank = Participant(" ", " ", " ");
+        return blank;
     }
 
     return participants[0];

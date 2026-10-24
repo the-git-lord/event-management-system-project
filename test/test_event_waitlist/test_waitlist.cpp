@@ -6,7 +6,7 @@
 #include "testEventCreationHelperFunctions.hpp"
 
 TEST(TestWaitlistHandling, WaitlistOverloaded) {
-
+	Event event = createValidEvent();
 }
 
 TEST(TestWaitlistHandling, WaitlistEmpty) {
@@ -16,11 +16,10 @@ TEST(TestWaitlistHandling, WaitlistEmpty) {
 
 TEST(TestWaitlistFunctionality, WaitlistParticipantAddition) {
 	Event event = createValidEvent();
-	
 }
 
 TEST(TestWaitlistFunctionality, WaitlistParticipantRemoval) {
-
+	Event event = createValidEvent();
 }
 
 int main(int argc, char **argv) {

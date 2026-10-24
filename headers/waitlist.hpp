@@ -15,6 +15,6 @@ public:
     void viewParticipants() const;
     bool removeParticipant(const User name);
     bool hasParticipants() const;
-	std::string getNextParticipant() const;
+	User getNextParticipant() const;
     int getSize() const;
 };

@@ -10,6 +10,10 @@ target_include_directories(Event
 )
 
 add_library(Waitlist waitlist.cpp)
+target_link_libraries(Waitlist
+  PRIVATE
+  User
+)
 target_include_directories(Waitlist
   PUBLIC
   ${PROJECT_SOURCE_DIR}/headers
