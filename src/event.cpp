@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "event.hpp"
 
 Event::Event() {
@@ -34,6 +35,16 @@ Event::Event() {
 	this->endTime->tm_isdst = 0;
 	
 	this->duration = 0.0;
+}
+
+bool Event::registerParticipant(User name) {
+    if (participants.size() >= capacity) {
+        return false;
+    }
+
+    participants.push_back(name);
+
+    return true;
 }
 
 void Event::setMinute(struct tm *time, int minute) {
@@ -149,20 +160,7 @@ double Event::getDurationDays() {
 
 	return this->duration;
 }
-bool Event::registerParticipant(std::string name) {
-    if (name.empty()) {
-        return false;
-    }
 
-    if (participants.size() >= capacity) {
-        return false;
-    }
-
-    participants.push_back(name);
-
-    return true;
-}
-
-std::vector<std::string> Event::getParticipants() const {
+std::vector<User> Event::getParticipants() const {
     return participants;
 }

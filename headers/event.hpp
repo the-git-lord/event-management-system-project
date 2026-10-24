@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+#include "user.hpp"
+
 typedef struct Location {
 	std::string building;
 	std::string room;
@@ -12,7 +14,8 @@ typedef struct Location {
 
 class Event {
 private:
-	std::vector<std::string> participants;
+	std::vector<User> participants;
+	
 	std::string name;
 	unsigned int capacity;
 	struct tm *startTime;
@@ -29,9 +32,7 @@ private:
 
 public:
 	Event();
-	bool registerParticipant(std::string name);
-
-	std::vector<std::string> getParticipants() const;
+	bool registerParticipant(User name);
 	
 	void setName(std::string name);
 	void setCapacity(int capacity);
@@ -45,6 +46,7 @@ public:
 	void setLocation(std::string building, std::string room);
 	void setLocation(Location location);
 
+	std::vector<User> getParticipants() const;
 	std::string getName();
 	int getCapacity();
 	struct tm* getStartTime();
