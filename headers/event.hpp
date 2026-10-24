@@ -6,13 +6,14 @@
 #include <vector>
 
 #include "user.hpp"
+#include "waitlist.hpp"
 
 typedef struct Location {
 	std::string building;
 	std::string room;
 } Location;
 
-class Event {
+class Event : public Waitlist {
 private:
 	std::vector<User> participants;
 	
@@ -32,17 +33,14 @@ private:
 
 public:
 	Event();
-	bool registerParticipant(User name);
+	void registerParticipant(User name);
 	
 	void setName(std::string name);
 	void setCapacity(int capacity);
-	
 	void setStartTime(int minute, int hour, int day, int month, int year);
 	void setStartTime(struct tm* time);
-	
 	void setEndTime(int minute, int hour, int day, int month, int year);
 	void setEndTime(struct tm* time);
-	
 	void setLocation(std::string building, std::string room);
 	void setLocation(Location location);
 

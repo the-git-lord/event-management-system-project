@@ -1,7 +1,9 @@
-#include "waitlist.hpp"
 #include <iostream>
+#include "waitlist.hpp"
 
-void Waitlist::addParticipant(const std::string& name) {
+Waitlist::Waitlist() {}
+
+void Waitlist::addParticipant(const User name) {
     participants.push_back(name);
 }
 
@@ -16,7 +18,7 @@ void Waitlist::viewParticipants() const {
     }
 }
 
-bool Waitlist::removeParticipant(const std::string& name) {
+bool Waitlist::removeParticipant(const User name) {
     for (std::size_t i = 0; i < participants.size(); i++) {
         if (participants[i] == name) {
             participants.erase(participants.begin() + i);

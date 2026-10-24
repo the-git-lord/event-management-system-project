@@ -16,7 +16,6 @@ protected:
     Role role;
     bool loggedIn;
 
-
 public:
     User(std::string name, std::string username, std::string password, Role role);
     virtual ~User() = default;

@@ -3,7 +3,6 @@
 #include "event.hpp"
 
 Event::Event() {
-    // Start with 0 capacity until it is set
     this->capacity = 0;
 
     this->startTime = (struct tm *)malloc(sizeof(struct tm));
@@ -37,14 +36,12 @@ Event::Event() {
 	this->duration = 0.0;
 }
 
-bool Event::registerParticipant(User name) {
+void Event::registerParticipant(User name) {
     if (participants.size() >= capacity) {
         return false;
     }
 
     participants.push_back(name);
-
-    return true;
 }
 
 void Event::setMinute(struct tm *time, int minute) {
