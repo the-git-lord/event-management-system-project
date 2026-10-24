@@ -1,5 +1,5 @@
-#include "waitlist.hpp"
 #include <iostream>
+#include "waitlist.hpp"
 
 Waitlist::Waitlist() {}
 

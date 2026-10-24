@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 
+#include "user.hpp"
+
 class Waitlist {
 private:
 	std::vector<User> participants;
