@@ -1,6 +1,8 @@
 #include "waitlist.hpp"
 #include <iostream>
 
+Waitlist::Waitlist() {}
+
 void Waitlist::addParticipant(const std::string& name) {
     participants.push_back(name);
 }

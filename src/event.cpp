@@ -3,7 +3,6 @@
 #include "event.hpp"
 
 Event::Event() {
-    // Start with 0 capacity until it is set
     this->capacity = 0;
 
     this->startTime = (struct tm *)malloc(sizeof(struct tm));
