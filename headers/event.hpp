@@ -11,7 +11,8 @@
 
 enum class RegisterCode {
 	ADDED_TO_EVENT,
-	ADDED_TO_WAITLIST
+	ADDED_TO_WAITLIST,
+	REJECTED_NO_AVAILABLE_SPACE
 };
 
 typedef struct Location {
