@@ -3,6 +3,7 @@
 #include "event.hpp"
 
 Event::Event() {
+	this->enrolled = 0;
     this->capacity = 0;
 
     this->startTime = (struct tm *)malloc(sizeof(struct tm));
@@ -36,14 +37,15 @@ Event::Event() {
 	this->duration = 0.0;
 }
 
-int Event::registerParticipant(User user) {
-    if (participants.size() >= capacity) {
+RegisterCode Event::addParticipant(User user) {
+    if (getEnrolledSize() >= capacity) {
 		Waitlist::addParticipant(user);
-		return 1;
+		return RegisterCode::ADDED_TO_WAITLIST;
     }
 
-	Event::participants.push_back(user);
-	return 0;
+	Event::participants.push_front(user);
+	enrolled++;
+	return RegisterCode::ADDED_TO_EVENT;
 }
 
 void Event::setMinute(struct tm *time, int minute) {
@@ -142,9 +144,17 @@ void Event::setLocation(std::string building, std::string room) {
 void Event::setLocation(Location location) {
 	this->location = location;
 }
-	
+
+std::forward_list<User> Event::getParticipants() const {
+    return Event::participants;
+}
+
+unsigned int Event::getEnrolledSize() {
+	return enrolled;
+}
+
 std::string Event::getName() { return this->name; }
-int Event::getCapacity() { return this->capacity; }
+unsigned int Event::getCapacity() { return this->capacity; }
 struct tm* Event::getStartTime() { return this->startTime; }
 struct tm* Event::getEndTime() { return this->endTime; }
 Location Event::getLocation() { return this->location; }
@@ -158,8 +168,4 @@ double Event::getDurationDays() {
 	this->duration = seconds / 60 / 60 / 365;
 
 	return this->duration;
-}
-
-std::vector<User> Event::getParticipants() const {
-    return participants;
 }

@@ -5,7 +5,7 @@
 #include "testEventCreationHelperFunctions.hpp"
 #include "testEventCheckHelperFunctions.hpp"
 
-TEST(TestEventCreation, EventTimeParameterBoundaries) {
+TEST(TestEventCreation, Event_Time_Parameter_Boundaries) {
 	Event event = Event();
 	struct tm *startTime = (struct tm *)malloc(sizeof(struct tm));
 	struct tm *endTime = (struct tm *)malloc(sizeof(struct tm));
@@ -19,7 +19,7 @@ TEST(TestEventCreation, EventTimeParameterBoundaries) {
 	ASSERT_TRUE(checkTimeEqualDefault(endTime));
 }
 
-TEST(TestEventCreation, EventSettersAndGetters) {
+TEST(TestEventCreation, Event_Setters_And_Getters) {
 	Event event = Event();
 	Event temp = Event();
 

@@ -4,9 +4,16 @@
 #include <ctime>
 #include <string>
 #include <vector>
+#include <forward_list>
 
 #include "user.hpp"
 #include "waitlist.hpp"
+
+enum class RegisterCode {
+	ADDED_TO_EVENT,
+	ADDED_TO_WAITLIST,
+	REJECTED_NO_AVAILABLE_SPACE
+};
 
 typedef struct Location {
 	std::string building;
@@ -15,7 +22,8 @@ typedef struct Location {
 
 class Event : public Waitlist {
 private:
-	std::vector<User> participants;
+	std::forward_list<User> participants;
+	unsigned int enrolled;
 	
 	std::string name;
 	unsigned int capacity;
@@ -33,7 +41,9 @@ private:
 
 public:
 	Event();
-	int registerParticipant(User name);
+	virtual ~Event() = default;
+	
+	RegisterCode addParticipant(User name);
 	
 	void setName(std::string name);
 	void setCapacity(int capacity);
@@ -44,9 +54,10 @@ public:
 	void setLocation(std::string building, std::string room);
 	void setLocation(Location location);
 
-	std::vector<User> getParticipants() const;
+	std::forward_list<User> getParticipants() const;
+	unsigned int getEnrolledSize();
 	std::string getName();
-	int getCapacity();
+	unsigned int getCapacity();
 	struct tm* getStartTime();
 	struct tm* getEndTime();
 	Location getLocation();

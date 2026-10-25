@@ -24,7 +24,7 @@ add_library(UserRegistrationHelperFunctions testEventUserRegistrationHelperFunct
 target_link_libraries(UserRegistrationHelperFunctions
   PRIVATE
   Event
-  EventCreationHelperFunctions
+  User
 )
 target_include_directories(UserRegistrationHelperFunctions
   PUBLIC

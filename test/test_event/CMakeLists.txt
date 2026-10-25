@@ -11,6 +11,7 @@ add_executable(TestEventUserRegistration testEventUserRegistrationMain.cpp)
 target_link_libraries(TestEventUserRegistration
   PRIVATE
   Event
+  EventCreationHelperFunctions
   UserRegistrationHelperFunctions
   GTest::gtest_main
 )
