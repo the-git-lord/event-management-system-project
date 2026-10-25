@@ -9,8 +9,8 @@ TEST(TestEventUserRegistration, OverCapacity) {
 	Participant user1 = Participant("Steve", "steve001", "1234");
 	Participant user2 = Participant("John", "john025", "5678");
 
-	ASSERT_EQ(event.registerParticipant(user1), 0);
-	ASSERT_EQ(event.registerParticipant(user2), 1);
+	ASSERT_EQ(event.registerParticipant(user1), RegisterCode::ADDED_TO_EVENT);
+	ASSERT_EQ(event.registerParticipant(user2), RegisterCode::ADDED_TO_WAITLIST);
 }
 
 TEST(TestEventUserRegistration, WithInCapacity) {
@@ -18,8 +18,8 @@ TEST(TestEventUserRegistration, WithInCapacity) {
 	Participant user1 = Participant("Steve", "steve001", "1234");
 	Participant user2 = Participant("John", "john025", "5678");
 
-	ASSERT_EQ(event.registerParticipant(user1), 0);
-	ASSERT_EQ(event.registerParticipant(user2), 0);
+	ASSERT_EQ(event.registerParticipant(user1), RegisterCode::ADDED_TO_EVENT);
+	ASSERT_EQ(event.registerParticipant(user2), RegisterCode::ADDED_TO_EVENT);
 }
 
 int main(int argc, char **argv) {
