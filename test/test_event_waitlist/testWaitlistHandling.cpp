@@ -1,5 +1,3 @@
-#include <iostream>
-#include <string>
 #include <gtest/gtest.h>
 
 #include "event.hpp"
@@ -12,14 +10,6 @@ TEST(TestWaitlistHandling, WaitlistOverloaded) {
 TEST(TestWaitlistHandling, WaitlistEmpty) {
 	Event event = createValidEvent();
 	ASSERT_EQ(event.Waitlist::hasParticipants(), 0);
-}
-
-TEST(TestWaitlistFunctionality, WaitlistParticipantAddition) {
-	Event event = createValidEvent();
-}
-
-TEST(TestWaitlistFunctionality, WaitlistParticipantRemoval) {
-	Event event = createValidEvent();
 }
 
 int main(int argc, char **argv) {
