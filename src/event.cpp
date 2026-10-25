@@ -37,7 +37,7 @@ Event::Event() {
 	this->duration = 0.0;
 }
 
-RegisterCode Event::registerParticipant(User user) {
+RegisterCode Event::addParticipant(User user) {
     if (getEnrolledSize() >= capacity) {
 		Waitlist::addParticipant(user);
 		return RegisterCode::ADDED_TO_WAITLIST;

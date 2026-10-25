@@ -42,7 +42,7 @@ public:
 	Event();
 	virtual ~Event() = default;
 	
-	RegisterCode registerParticipant(User name);
+	RegisterCode addParticipant(User name);
 	
 	void setName(std::string name);
 	void setCapacity(int capacity);
