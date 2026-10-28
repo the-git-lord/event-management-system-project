@@ -29,6 +29,7 @@ private:
 	unsigned int capacity;
 	struct tm *startTime;
 	struct tm *endTime;
+	struct tm *deadline;
 	Location location;
 	double duration;
 

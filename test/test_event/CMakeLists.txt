@@ -16,6 +16,16 @@ target_link_libraries(TestEventUserRegistration
   GTest::gtest_main
 )
 
+add_executable(TestEventRegistrationDeadline testEventRegistrationDeadline.cpp)
+target_link_libraries(TestEventRegistrationDeadline
+  PRIVATE
+  Event
+  EventCreationHelperFunctions
+  UserRegistrationHelperFunctions
+  GTest::gtest_main
+)
+
 include(GoogleTest)
 gtest_discover_tests(TestEventCreation)
 gtest_discover_tests(TestEventUserRegistration)
+gtest_discover_tests(TestEventRegistrationDeadline)

@@ -7,7 +7,7 @@
 #include "testEventCreationHelperFunctions.hpp"
 #include "testEventUserRegistrationHelperFunctions.hpp"
 
-TEST(TestEventUserRegistration, Over_Capacity) {
+TEST(Event_User_Registration, Over_Capacity) {
 	Event event = createValidEventOneCapacity();
 	Participant user1 = Participant("Steve", "steve001", "1234");
 	Participant user2 = Participant("John", "john025", "5678");
