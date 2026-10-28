@@ -16,7 +16,7 @@ TEST(TestEventUserRegistration, Over_Capacity) {
 	ASSERT_EQ(event.addParticipant(user2), RegisterCode::ADDED_TO_WAITLIST);
 }
 
-TEST(TestEventUserRegistration, Within_Capacity) {
+TEST(Event_User_Registration, Within_Capacity) {
 	Event event = createValidEvent();
 	Participant user1 = Participant("Steve", "steve001", "1234");
 	Participant user2 = Participant("John", "john025", "5678");
@@ -25,7 +25,7 @@ TEST(TestEventUserRegistration, Within_Capacity) {
 	ASSERT_EQ(event.addParticipant(user2), RegisterCode::ADDED_TO_EVENT);
 }
 
-TEST(TestEventUserRegistration, Event_Enrolled_User_Count_Match) {
+TEST(Event_User_Registration, Event_Enrolled_User_Count_Match) {
 	int enrolled = 0;
 	
 	Event event = createValidEvent();
@@ -40,6 +40,22 @@ TEST(TestEventUserRegistration, Event_Enrolled_User_Count_Match) {
 	}
 
 	ASSERT_EQ(event.getEnrolledSize(), enrolled);
+}
+
+TEST(Event_User_Registration, Event_Workshop_Users) {
+
+}
+
+TEST(Event_User_Registration, Event_Conference_Users) {
+
+}
+
+TEST(Event_User_Registration, Event_Training_Users) {
+
+}
+
+TEST(Event_User_Registration, Event_Community_Users) {
+
 }
 
 int main(int argc, char **argv) {
