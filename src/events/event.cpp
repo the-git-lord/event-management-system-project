@@ -169,3 +169,5 @@ double Event::getDurationDays() {
 
 	return this->duration;
 }
+
+int Event::getRemainingCapacity() { return capacity - enrolled; }

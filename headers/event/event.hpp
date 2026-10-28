@@ -41,9 +41,9 @@ private:
 
 public:
 	Event();
-	virtual ~Event() = default;
+	virtual ~Event() = 0;
 	
-	RegisterCode addParticipant(User name);
+	virtual RegisterCode addParticipant(User name) = 0;
 	
 	void setName(std::string name);
 	void setCapacity(int capacity);
@@ -62,6 +62,7 @@ public:
 	struct tm* getEndTime();
 	Location getLocation();
 	double getDurationDays();
+	int getRemainingCapacity();
 };
 
 #endif
