@@ -70,3 +70,33 @@ TEST(ParticipantTypesTest, IndependentTypes) {
     EXPECT_EQ(participant.getCommunityType(),
               CommunityParticipantType::NONE);
 }
+// Check that a participant's name can contain spaces.
+TEST(ParticipantTypesTest, NameWithSpaces) {
+    Participant participant("Aditi Jitta", "aditi", "password");
+
+    EXPECT_EQ(participant.getName(), "Aditi Jitta");
+}
+
+// Check that special characters in a name are stored correctly.
+TEST(ParticipantTypesTest, SpecialCharactersInName) {
+    Participant participant("Aditi-Jitta_123", "aditi123", "password");
+
+    EXPECT_EQ(participant.getName(), "Aditi-Jitta_123");
+}
+
+// Check that updating multiple participant types works correctly.
+TEST(ParticipantTypesTest, MultipleTypeUpdates) {
+    Participant participant("Aditi", "aditi", "password");
+
+    participant.setWorkshopType(WorkshopParticipantType::STUDENT);
+    participant.setConferenceType(ConferenceParticipantType::SPEAKER);
+
+    EXPECT_EQ(participant.getWorkshopType(),
+              WorkshopParticipantType::STUDENT);
+    EXPECT_EQ(participant.getConferenceType(),
+              ConferenceParticipantType::SPEAKER);
+    EXPECT_EQ(participant.getTrainingType(),
+              TrainingParticipantType::NONE);
+    EXPECT_EQ(participant.getCommunityType(),
+              CommunityParticipantType::NONE);
+}
