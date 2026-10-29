@@ -1,5 +1,5 @@
-add_executable(TestWaitlist test_waitlist.cpp)
-target_link_libraries(TestWaitlist
+add_executable(TestWaitlistHandling testWaitlistHandling.cpp)
+target_link_libraries(TestWaitlistHandling
   PRIVATE
   Event
   Waitlist
@@ -7,5 +7,15 @@ target_link_libraries(TestWaitlist
   GTest::gtest_main
 )
 
+add_executable(TestWaitlistParticipant testWaitlistParticipant.cpp)
+target_link_libraries(TestWaitlistParticipant
+  PRIVATE
+  Event
+  Waitlist
+  EventCreationHelperfunctions
+  GTest::gtest_main
+)
+
 include(GoogleTest)
-gtest_discover_tests(TestWaitlist)
+gtest_discover_tests(TestWaitlistHandling)
+gtest_discover_tests(TestWaitlistParticipant)

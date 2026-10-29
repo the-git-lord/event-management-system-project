@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "event.hpp"
+#include "testEventCreationHelperFunctions.hpp"
 
 TEST(TestWaitlistFunctionality, WaitlistParticipantAddition) {
 	Event event = createValidEvent();
@@ -8,9 +9,4 @@ TEST(TestWaitlistFunctionality, WaitlistParticipantAddition) {
 
 TEST(TestWaitlistFunctionality, WaitlistParticipantRemoval) {
 	Event event = createValidEvent();
-}
-
-int main(int argc, char **argv) {
-	testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
 }
