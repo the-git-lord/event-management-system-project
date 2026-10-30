@@ -58,3 +58,83 @@ Event* Administrator::findEvent(std::vector<Event>& events, std::string eventNam
     }
     return nullptr;
 }
+
+bool Administrator::warnUser(User& user) {
+    if (!hasAdminPrivileges()) 
+        return false;
+
+    user.warnings++;
+    return true;
+}
+
+bool Administrator::removeUserFromEvent(Event& event, User& user) {
+    if (!hasAdminPrivileges())
+        return false;
+    
+    return event.removeEnrolledParticipant(user.getUsername());
+}
+
+bool Administrator::banUser(User& user) {
+    if (!hasAdminPrivileges())
+        return false;
+    
+    // Admins cannot ban other admins
+    if (user.getRole() == Role::ADMINISTRATOR)
+        return false;
+
+    user.banned = true;
+    return true;
+}
+
+bool Administrator::unbanUser(User& user) {
+    if (!hasAdminPrivileges())
+        return false;
+    
+    user.banned = false;
+    return true;
+}
+
+bool Administrator::handleReport(Report& report, User& reportedUser, ReportAction action, Event* event) {
+    if (!hasAdminPrivileges())
+        return false;
+    
+    if (!report.isOpen())
+        return false;
+    
+    // Make sure we are acting on the user the report is about
+    if (report.getReportedUsername() != reportedUser.getUsername())
+        return false;
+
+    bool success = false;
+
+    switch (action) {
+        case ReportAction::WARNING:
+            success = warnUser(reportedUser);
+            break;
+        case ReportAction::REMOVED_FROM_EVENT:
+            if (event != nullptr)
+               success = removeUserFromEvent(*event, reportedUser);
+            break;
+        case ReportAction::BANNED:
+            success = banUser(reportedUser);
+            break;
+        case ReportAction::NONE:
+            break;
+    }
+
+    if (success) 
+        report.resolve(action);
+
+    return success;
+}
+
+bool Administrator::dismissReport(Report& report) {
+    if (!hasAdminPrivileges())
+        return false;
+    
+    if (!report.isOpen())
+        return false;
+
+    report.dismiss();
+    return true;
+}

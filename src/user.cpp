@@ -6,6 +6,8 @@ User::User(std::string name, std::string username, std::string password, Role ro
 	this->password = password;
 	this->role = role;
 	this->loggedIn = false;
+	this->warnings = 0;
+	this->banned = false;
 }
 
 bool User::login(std::string username, std::string password) {
@@ -41,6 +43,14 @@ bool User::isLoggedIn() const {
 
 bool User::hasAdminPrivileges() const {
 	return this-> loggedIn && this->role == Role::ADMINISTRATOR;
+}
+
+int User::getWarningCount() const {
+	return this->warnings;
+}
+
+bool User::isBanned() const {
+	return this->banned;
 }
 
 Participant::Participant(std::string name, std::string username, std::string password)

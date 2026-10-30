@@ -19,7 +19,19 @@ target_include_directories(Waitlist
   ${PROJECT_SOURCE_DIR}/headers
 )
 
+add_library(Report report.cpp)
+target_include_directories(Report
+  PUBLIC
+  ${PROJECT_SOURCE_DIR}/headers
+)
+
 add_library(Admin admin.cpp)
+target_link_libraries(Admin
+  PUBLIC
+  Event
+  User
+  Report
+)
 target_include_directories(Admin
   PUBLIC
   ${PROJECT_SOURCE_DIR}/headers
@@ -59,6 +71,7 @@ target_link_libraries(runapp
   Waitlist
   Admin
   User
+  Report
   UI
   Input
 )
