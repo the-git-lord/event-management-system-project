@@ -1,20 +1,20 @@
 #include <iostream>
 #include <string>
-#include <vector>
+#include <queue>
 
 #include "user.hpp"
 
 class Waitlist {
 private:
-	std::vector<User> participants;
+    std::queue<User> participants;
+    int waitlistCapacity;
 
 public:
-	Waitlist();
-	
-    void addParticipant(const User name);
-    void viewParticipants() const;
+    Waitlist();
+
+    bool addParticipant(const User name);
     bool removeParticipant(const User name);
     bool hasParticipants() const;
-	User getNextParticipant() const;
+    User getNextParticipant() const;
     int getSize() const;
 };

@@ -14,27 +14,23 @@ bool Waitlist::addParticipant(const User name) {
     return true;
 }
 
-void Waitlist::viewParticipants() const {
-    if (participants.empty()) {
-        std::cout << "The waitlist is empty." << std::endl;
-        return;
-    }
-
-    for (std::size_t i = 0; i < participants.size(); i++) {
-        std::cout << i + 1 << ". "
-                  << participants[i].getName() << std::endl;
-    }
-}
-
 bool Waitlist::removeParticipant(const User name) {
-    for (std::size_t i = 0; i < participants.size(); i++) {
-        if (participants[i].getName() == name.getName()) {
-            participants.erase(participants.begin() + i);
-            return true;
+    std::queue<User> temp;
+    bool removed = false;
+
+    while (!participants.empty()) {
+        User current = participants.front();
+        participants.pop();
+
+        if (current.getName() == name.getName() && !removed) {
+            removed = true;
+        } else {
+            temp.push(current);
         }
     }
 
-    return false;
+    participants = temp;
+    return removed;
 }
 
 bool Waitlist::hasParticipants() const {
@@ -47,7 +43,7 @@ User Waitlist::getNextParticipant() const {
         return blank;
     }
 
-    return participants[0];
+    return participants.front();
 }
 
 int Waitlist::getSize() const {
