@@ -12,7 +12,7 @@ target_link_libraries(TestWaitlistParticipant
   PRIVATE
   Event
   Waitlist
-  EventCreationHelperfunctions
+  EventCreationHelperFunctions
   GTest::gtest_main
 )
 

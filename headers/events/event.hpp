@@ -12,7 +12,8 @@
 enum class RegisterCode {
 	ADDED_TO_EVENT,
 	ADDED_TO_WAITLIST,
-	REJECTED_NO_AVAILABLE_SPACE
+	REJECTED_NO_AVAILABLE_SPACE,
+	REJECTED_BANNED
 };
 
 typedef struct Location {
@@ -42,9 +43,11 @@ private:
 
 public:
 	Event();
-	virtual ~Event() = 0;
+	virtual ~Event() = default;
 	
 	virtual RegisterCode addParticipant(User name) = 0;
+	bool removeEnrolledParticipant(std::string username);
+	bool isEnrolled(std::string username) const;
 	
 	void setName(std::string name);
 	void setCapacity(int capacity);

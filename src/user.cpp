@@ -6,6 +6,8 @@ User::User(std::string name, std::string username, std::string password, Role ro
 	this->password = password;
 	this->role = role;
 	this->loggedIn = false;
+	this->warnings = 0;
+	this->banned = false;
 }
 
 bool User::login(std::string username, std::string password) {
@@ -43,5 +45,44 @@ bool User::hasAdminPrivileges() const {
 	return this-> loggedIn && this->role == Role::ADMINISTRATOR;
 }
 
+int User::getWarningCount() const {
+	return this->warnings;
+}
+
+bool User::isBanned() const {
+	return this->banned;
+}
+
 Participant::Participant(std::string name, std::string username, std::string password)
 	: User(name, username, password, Role::PARTICIPANT) {}
+void Participant::setWorkshopType(WorkshopParticipantType type) {
+    workshopType = type;
+}
+
+WorkshopParticipantType Participant::getWorkshopType() const {
+    return workshopType;
+}
+
+void Participant::setConferenceType(ConferenceParticipantType type) {
+    conferenceType = type;
+}
+
+ConferenceParticipantType Participant::getConferenceType() const {
+    return conferenceType;
+}
+
+void Participant::setTrainingType(TrainingParticipantType type) {
+    trainingType = type;
+}
+
+TrainingParticipantType Participant::getTrainingType() const {
+    return trainingType;
+}
+
+void Participant::setCommunityType(CommunityParticipantType type) {
+    communityType = type;
+}
+
+CommunityParticipantType Participant::getCommunityType() const {
+    return communityType;
+}
