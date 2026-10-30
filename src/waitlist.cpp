@@ -1,30 +1,36 @@
 #include "../headers/Waitlist.h"
-#include <iostream>
+#include <queue>
 
-void Waitlist::addParticipant(const std::string& name) {
-    participants.push_back(name);
+Waitlist::Waitlist() {
+    waitlistCapacity = 10;
 }
 
-void Waitlist::viewParticipants() const {
-    if (participants.empty()) {
-        std::cout << "The waitlist is empty." << std::endl;
-        return;
+bool Waitlist::addParticipant(const std::string& name) {
+    if (participants.size() >= waitlistCapacity) {
+        return false;
     }
 
-    for (int i = 0; i < participants.size(); i++) {
-        std::cout << i + 1 << ". " << participants[i] << std::endl;
-    }
+    participants.push(name);
+    return true;
 }
 
 bool Waitlist::removeParticipant(const std::string& name) {
-    for (int i = 0; i < participants.size(); i++) {
-        if (participants[i] == name) {
-            participants.erase(participants.begin() + i);
-            return true;
+    std::queue<std::string> temp;
+    bool removed = false;
+
+    while (!participants.empty()) {
+        std::string current = participants.front();
+        participants.pop();
+
+        if (current == name && !removed) {
+            removed = true;
+        } else {
+            temp.push(current);
         }
     }
 
-    return false;
+    participants = temp;
+    return removed;
 }
 
 bool Waitlist::hasParticipants() const {
@@ -36,7 +42,7 @@ std::string Waitlist::getNextParticipant() const {
         return "";
     }
 
-    return participants[0];
+    return participants.front();
 }
 
 int Waitlist::getSize() const {

@@ -1,18 +1,17 @@
-#include <iostream>
 #include <string>
-#include <vector>
-
-using namespace std;
+#include <queue>
 
 class Waitlist {
 private:
-    vector<string> participants;
+    std::queue<std::string> participants;
+    int waitlistCapacity;
 
 public:
-    void addParticipant(const string& name);
-    void viewParticipants() const;
-    bool removeParticipant(const string& name);
+    Waitlist();
+
+    bool addParticipant(const std::string& name);
+    bool removeParticipant(const std::string& name);
     bool hasParticipants() const;
-    string getNextParticipant() const;
+    std::string getNextParticipant() const;
     int getSize() const;
 };
