@@ -74,7 +74,7 @@ TEST(ParticipantTypesTest, IndependentTypes) {
 TEST(ParticipantTypesTest, NameWithSpaces) {
     Participant participant("Aditi Jitta", "aditi", "password");
 
-    EXPECT_EQ(participant.getName(), "Aditi Jitta");
+    EXPECT_STREQ(participant.getName().c_str(), "Aditi Jitta");
 }
 
 // Check that special characters in a name are stored correctly.
