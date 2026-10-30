@@ -7,7 +7,36 @@ enum class Role {
     PARTICIPANT,
     ADMINISTRATOR
 };
+enum class WorkshopParticipantType {
+    NONE,
+    STUDENT,
+    BEGINNER,
+    PROFESSIONAL,
+    INSTRUCTOR
+};
 
+enum class ConferenceParticipantType {
+    NONE,
+    RESEARCHER,
+    PROFESSOR,
+    SPEAKER,
+    ATTENDEE
+};
+
+enum class TrainingParticipantType {
+    NONE,
+    EMPLOYEE,
+    TRAINEE,
+    TRAINER
+};
+
+enum class CommunityParticipantType {
+    NONE,
+    VOLUNTEER,
+    RESIDENT,
+    ORGANIZER,
+    ATTENDEE
+};
 class User {
 protected:
     std::string name;
@@ -32,9 +61,28 @@ public:
     bool hasAdminPrivileges() const;
 };
 
+
+
 class Participant : public User {
+private:
+    WorkshopParticipantType workshopType = WorkshopParticipantType::NONE;
+    ConferenceParticipantType conferenceType = ConferenceParticipantType::NONE;
+    TrainingParticipantType trainingType = TrainingParticipantType::NONE;
+    CommunityParticipantType communityType = CommunityParticipantType::NONE;
 public:
     Participant(std::string name, std::string username, std::string password);
-};
 
-#endif 
+void setWorkshopType(WorkshopParticipantType type);
+WorkshopParticipantType getWorkshopType() const;
+
+void setConferenceType(ConferenceParticipantType type);
+ConferenceParticipantType getConferenceType() const;
+
+void setTrainingType(TrainingParticipantType type);
+TrainingParticipantType getTrainingType() const;
+
+void setCommunityType(CommunityParticipantType type);
+CommunityParticipantType getCommunityType() const;
+
+};
+#endif
