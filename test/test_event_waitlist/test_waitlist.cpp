@@ -7,39 +7,69 @@
 TEST(TestWaitlistHandling, WaitlistOverloaded) {
     Event event = createValidEvent();
 
-    event.waitlist.addParticipant("Michael");
-    event.waitlist.addParticipant("Alex");
-    event.waitlist.addParticipant("Sarah");
+    User user = Participant("Michael", "A", "1");
 
-    ASSERT_EQ(event.waitlist.getSize(), 3);
+    for (int i = 0; i < 10; i++) {
+        ASSERT_TRUE(event.Waitlist::addParticipant(user));
+    }
+
+    ASSERT_EQ(event.Waitlist::getSize(), 10);
+
+    User extra = Participant("Alex", "B", "2");
+
+    ASSERT_FALSE(event.Waitlist::addParticipant(extra));
+    ASSERT_EQ(event.Waitlist::getSize(), 10);
 }
 
 TEST(TestWaitlistHandling, WaitlistEmpty) {
     Event event = createValidEvent();
 
-    ASSERT_EQ(event.waitlist.hasParticipants(), false);
-    ASSERT_EQ(event.waitlist.getSize(), 0);
+    ASSERT_FALSE(event.Waitlist::hasParticipants());
+    ASSERT_EQ(event.Waitlist::getSize(), 0);
 }
 
 TEST(TestWaitlistFunctionality, WaitlistParticipantAddition) {
     Event event = createValidEvent();
 
-    event.waitlist.addParticipant("Michael");
+    User first = Participant("Michael", "A", "1");
+    User second = Participant("Alex", "B", "2");
 
-    ASSERT_EQ(event.waitlist.hasParticipants(), true);
-    ASSERT_EQ(event.waitlist.getSize(), 1);
-    ASSERT_EQ(event.waitlist.getNextParticipant(), "Michael");
+    ASSERT_TRUE(event.Waitlist::addParticipant(first));
+    ASSERT_TRUE(event.Waitlist::addParticipant(second));
+
+    ASSERT_EQ(event.Waitlist::getSize(), 2);
+
+    ASSERT_STREQ(
+        event.Waitlist::getNextParticipant().getName().c_str(),
+        first.getName().c_str()
+    );
 }
 
 TEST(TestWaitlistFunctionality, WaitlistParticipantRemoval) {
     Event event = createValidEvent();
 
-    event.waitlist.addParticipant("Michael");
-    event.waitlist.addParticipant("Alex");
+    User first = Participant("Michael", "A", "1");
+    User second = Participant("Alex", "B", "2");
+    User third = Participant("Sarah", "C", "3");
 
-    ASSERT_EQ(event.waitlist.removeParticipant("Michael"), true);
-    ASSERT_EQ(event.waitlist.getSize(), 1);
-    ASSERT_EQ(event.waitlist.getNextParticipant(), "Alex");
+    event.Waitlist::addParticipant(first);
+    event.Waitlist::addParticipant(second);
+    event.Waitlist::addParticipant(third);
+
+    ASSERT_TRUE(event.Waitlist::removeParticipant(second));
+    ASSERT_EQ(event.Waitlist::getSize(), 2);
+
+    ASSERT_STREQ(
+        event.Waitlist::getNextParticipant().getName().c_str(),
+        first.getName().c_str()
+    );
+
+    ASSERT_TRUE(event.Waitlist::removeParticipant(first));
+
+    ASSERT_STREQ(
+        event.Waitlist::getNextParticipant().getName().c_str(),
+        third.getName().c_str()
+    );
 }
 
 int main(int argc, char **argv) {

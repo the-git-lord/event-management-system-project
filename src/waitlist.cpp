@@ -1,10 +1,17 @@
 #include <iostream>
 #include "waitlist.hpp"
 
-Waitlist::Waitlist() {}
+Waitlist::Waitlist() {
+    waitlistCapacity = 10;
+}
 
-void Waitlist::addParticipant(const User name) {
-    participants.push_back(name);
+bool Waitlist::addParticipant(const User name) {
+    if (participants.size() >= waitlistCapacity) {
+        return false;
+    }
+
+    participants.push(name);
+    return true;
 }
 
 void Waitlist::viewParticipants() const {
@@ -14,7 +21,8 @@ void Waitlist::viewParticipants() const {
     }
 
     for (std::size_t i = 0; i < participants.size(); i++) {
-        std::cout << i + 1 << ". " << participants[i].getName() << std::endl;
+        std::cout << i + 1 << ". "
+                  << participants[i].getName() << std::endl;
     }
 }
 
@@ -35,7 +43,7 @@ bool Waitlist::hasParticipants() const {
 
 User Waitlist::getNextParticipant() const {
     if (participants.empty()) {
-		Participant blank = Participant(" ", " ", " ");
+        Participant blank = Participant(" ", " ", " ");
         return blank;
     }
 
