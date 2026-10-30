@@ -38,6 +38,10 @@ Event::Event() {
 }
 
 RegisterCode Event::addParticipant(User user) {
+	if (user.isBanned()) {
+		return RegisterCode::REJECTED_BANNED;
+	}
+
     if (getEnrolledSize() >= capacity) {
 		Waitlist::addParticipant(user);
 		return RegisterCode::ADDED_TO_WAITLIST;
@@ -46,6 +50,28 @@ RegisterCode Event::addParticipant(User user) {
 	Event::participants.push_front(user);
 	enrolled++;
 	return RegisterCode::ADDED_TO_EVENT;
+}
+
+bool Event::removeEnrolledParticipant(std::string username) {
+	if (!isEnrolled(username))
+		return false;
+	
+	participants.remove_if([&username](const User& user) {
+		return user.getUsername() == username;
+	});
+	enrolled--;
+
+	// TODO: move the next person off the waitlist into the open spot
+	return true;
+}
+
+bool Event::isEnrolled(std::string username) const {
+	for (const User& user : participants) {
+		if (user.getUsername() == username) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void Event::setMinute(struct tm *time, int minute) {

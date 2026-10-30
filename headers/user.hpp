@@ -45,6 +45,13 @@ protected:
     Role role;
     bool loggedIn;
 
+private:
+    // Only an Administrator can change these (see friend below)
+    int warnings;
+    bool banned;
+
+    friend class Administrator;
+
 public:
     User(std::string name, std::string username, std::string password, Role role);
     virtual ~User() = default;
@@ -59,6 +66,9 @@ public:
 
     // True if the user is an administrator, false otherwise
     bool hasAdminPrivileges() const;
+
+    int getWarningCount() const;
+    bool isBanned() const;
 };
 
 
