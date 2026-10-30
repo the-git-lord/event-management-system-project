@@ -55,3 +55,34 @@ bool User::isBanned() const {
 
 Participant::Participant(std::string name, std::string username, std::string password)
 	: User(name, username, password, Role::PARTICIPANT) {}
+void Participant::setWorkshopType(WorkshopParticipantType type) {
+    workshopType = type;
+}
+
+WorkshopParticipantType Participant::getWorkshopType() const {
+    return workshopType;
+}
+
+void Participant::setConferenceType(ConferenceParticipantType type) {
+    conferenceType = type;
+}
+
+ConferenceParticipantType Participant::getConferenceType() const {
+    return conferenceType;
+}
+
+void Participant::setTrainingType(TrainingParticipantType type) {
+    trainingType = type;
+}
+
+TrainingParticipantType Participant::getTrainingType() const {
+    return trainingType;
+}
+
+void Participant::setCommunityType(CommunityParticipantType type) {
+    communityType = type;
+}
+
+CommunityParticipantType Participant::getCommunityType() const {
+    return communityType;
+}
