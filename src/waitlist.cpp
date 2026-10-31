@@ -10,27 +10,19 @@ bool Waitlist::addParticipant(const User name) {
         return false;
     }
 
-    participants.push(name);
+    participants.push_back(name);
     return true;
 }
 
 bool Waitlist::removeParticipant(const User name) {
-    std::queue<User> temp;
-    bool removed = false;
-
-    while (!participants.empty()) {
-        User current = participants.front();
-        participants.pop();
-
-        if (current.getName() == name.getName() && !removed) {
-            removed = true;
-        } else {
-            temp.push(current);
+    for (auto it = participants.begin(); it != participants.end(); it++) {
+        if (it->getName() == name.getName()) {
+            participants.erase(it);
+            return true;
         }
     }
 
-    participants = temp;
-    return removed;
+    return false;
 }
 
 bool Waitlist::hasParticipants() const {

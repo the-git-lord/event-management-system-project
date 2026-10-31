@@ -1,12 +1,12 @@
 #include <iostream>
 #include <string>
-#include <queue>
+#include <list>
 
 #include "user.hpp"
 
 class Waitlist {
 private:
-    std::queue<User> participants;
+    std::list<User> participants;
     int waitlistCapacity;
 
 public:
