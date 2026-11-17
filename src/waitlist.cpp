@@ -6,7 +6,7 @@ Waitlist::Waitlist() {
 }
 
 bool Waitlist::addParticipant(const User name) {
-    if (participants.size() >= waitlistCapacity) {
+    if (getSize() >= waitlistCapacity) {
         return false;
     }
 
@@ -14,8 +14,28 @@ bool Waitlist::addParticipant(const User name) {
     return true;
 }
 
+bool Waitlist::addPriorityParticipant(const User name) {
+    if (getSize() >= waitlistCapacity) {
+        return false;
+    }
+
+    priorityParticipants.push_back(name);
+    return true;
+}
+
 bool Waitlist::removeParticipant(const User name) {
-    for (auto it = participants.begin(); it != participants.end(); it++) {
+    for (std::list<User>::iterator it = priorityParticipants.begin();
+         it != priorityParticipants.end(); it++) {
+
+        if (it->getName() == name.getName()) {
+            priorityParticipants.erase(it);
+            return true;
+        }
+    }
+
+    for (std::list<User>::iterator it = participants.begin();
+         it != participants.end(); it++) {
+
         if (it->getName() == name.getName()) {
             participants.erase(it);
             return true;
@@ -26,18 +46,22 @@ bool Waitlist::removeParticipant(const User name) {
 }
 
 bool Waitlist::hasParticipants() const {
-    return !participants.empty();
+    return !priorityParticipants.empty() || !participants.empty();
 }
 
 User Waitlist::getNextParticipant() const {
-    if (participants.empty()) {
-        Participant blank = Participant(" ", " ", " ");
-        return blank;
+    if (!priorityParticipants.empty()) {
+        return priorityParticipants.front();
     }
 
-    return participants.front();
+    if (!participants.empty()) {
+        return participants.front();
+    }
+
+    Participant blank = Participant(" ", " ", " ");
+    return blank;
 }
 
 int Waitlist::getSize() const {
-    return participants.size();
+    return participants.size() + priorityParticipants.size();
 }
