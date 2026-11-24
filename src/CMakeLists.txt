@@ -37,6 +37,12 @@ target_include_directories(Admin
   ${PROJECT_SOURCE_DIR}/headers
 )
 
+add_library(Password password.cpp)
+target_include_directories(Password
+  PUBLIC
+  ${PROJECT_SOURCE_DIR}/headers
+)
+
 add_library(User user.cpp)
 target_link_libraries(User
   PUBLIC
