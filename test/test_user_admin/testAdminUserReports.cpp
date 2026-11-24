@@ -22,7 +22,7 @@ protected:
 };
 
 TEST_F(AdminUserReports, New_Report_Is_Open) {
-    Report report(1, "alex02", "sam01", "Spamming in the chat");
+    Report report(1, "alex02", "sam01", ReportReason::SPAM);
 
     ASSERT_TRUE(report.isOpen());
     ASSERT_EQ(report.getStatus(), ReportStatus::OPEN);
@@ -83,7 +83,7 @@ TEST_F(AdminUserReports, Cannot_Ban_Another_Admin) {
 }
 
 TEST_F(AdminUserReports, Logged_Out_Admin_Cannot_Take_Action) {
-    Report report(1, "alex02", "sam01", "Spamming in the chat");
+    Report report(1, "alex02", "sam01", ReportReason::SPAM);
     admin.logout();
 
     ASSERT_FALSE(admin.warnUser(user));
@@ -99,7 +99,7 @@ TEST_F(AdminUserReports, Logged_Out_Admin_Cannot_Take_Action) {
 }
 
 TEST_F(AdminUserReports, Handle_Report_With_Warning) {
-    Report report(1, "alex02", "sam01", "Spamming in the chat");
+    Report report(1, "alex02", "sam01", ReportReason::SPAM);
 
     ASSERT_TRUE(admin.handleReport(report, user, ReportAction::WARNING));
     ASSERT_EQ(user.getWarningCount(), 1);
@@ -108,7 +108,7 @@ TEST_F(AdminUserReports, Handle_Report_With_Warning) {
 }
 
 TEST_F(AdminUserReports, Handle_Report_By_Removing_From_Event) {
-    Report report(2, "alex02", "sam01", "Disruptive behavior");
+    Report report(2, "alex02", "sam01", ReportReason::INAPPROPRIATE_BEHAVIOR);
 
     ASSERT_TRUE(admin.handleReport(report, user, ReportAction::REMOVED_FROM_EVENT, &event));
     ASSERT_FALSE(event.isEnrolled("sam01"));
@@ -116,14 +116,14 @@ TEST_F(AdminUserReports, Handle_Report_By_Removing_From_Event) {
 }
 
 TEST_F(AdminUserReports, Remove_From_Event_Needs_An_Event) {
-    Report report(2, "alex02", "sam01", "Disruptive behavior");
+    Report report(2, "alex02", "sam01", ReportReason::INAPPROPRIATE_BEHAVIOR);
 
     ASSERT_FALSE(admin.handleReport(report, user, ReportAction::REMOVED_FROM_EVENT));
     ASSERT_TRUE(report.isOpen());
 }
 
 TEST_F(AdminUserReports, Handle_Report_With_Ban) {
-    Report report(3, "alex02", "sam01", "Harassment");
+    Report report(3, "alex02", "sam01", ReportReason::HARASSMENT);
 
     ASSERT_TRUE(admin.handleReport(report, user, ReportAction::BANNED));
     ASSERT_TRUE(user.isBanned());
@@ -131,7 +131,7 @@ TEST_F(AdminUserReports, Handle_Report_With_Ban) {
 }
 
 TEST_F(AdminUserReports, Cannot_Handle_Report_For_Wrong_User) {
-    Report report(1, "alex02", "sam01", "Spamming in the chat");
+    Report report(1, "alex02", "sam01", ReportReason::SPAM);
     Participant other("Kim", "kim07", "xyz");
 
     ASSERT_FALSE(admin.handleReport(report, other, ReportAction::BANNED));
@@ -140,7 +140,7 @@ TEST_F(AdminUserReports, Cannot_Handle_Report_For_Wrong_User) {
 }
 
 TEST_F(AdminUserReports, Cannot_Handle_Closed_Report_Twice) {
-    Report report(1, "alex02", "sam01", "Spamming in the chat");
+    Report report(1, "alex02", "sam01", ReportReason::SPAM);
 
     ASSERT_TRUE(admin.handleReport(report, user, ReportAction::WARNING));
     ASSERT_FALSE(admin.handleReport(report, user, ReportAction::WARNING));
@@ -148,7 +148,7 @@ TEST_F(AdminUserReports, Cannot_Handle_Closed_Report_Twice) {
 }
 
 TEST_F(AdminUserReports, Dismiss_Report) {
-    Report report(1, "alex02", "sam01", "Not actually a problem");
+    Report report(1, "alex02", "sam01", ReportReason::OTHER, "Not actually a problem");
 
     ASSERT_TRUE(admin.dismissReport(report));
     ASSERT_EQ(report.getStatus(), ReportStatus::DISMISSED);
