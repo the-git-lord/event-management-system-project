@@ -4,6 +4,7 @@
 #include <string>
 
 #include "report.hpp"
+#include "password.hpp"
 
 enum class Role {
     PARTICIPANT,
@@ -43,7 +44,9 @@ class User {
 protected:
     std::string name;
     std::string username;
-    std::string password;
+    // The plain test password is never stored, only a salt and the salted hash
+    std::string passwordSalt;
+    std::string passwordHash;
     Role role;
     bool loggedIn;
 
@@ -63,6 +66,8 @@ public:
 
     std::string getName() const;
     std::string getUsername() const;
+    std::string getPasswordSalt() const;
+    std::string getPasswordHash() const;
     Role getRole() const;
     bool isLoggedIn() const;
 

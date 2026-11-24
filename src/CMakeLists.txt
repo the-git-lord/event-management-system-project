@@ -47,6 +47,7 @@ add_library(User user.cpp)
 target_link_libraries(User
   PUBLIC
   Report
+  Password
 )
 target_include_directories(User
   PUBLIC

@@ -3,7 +3,8 @@
 User::User(std::string name, std::string username, std::string password, Role role) {
 	this->name = name;
 	this->username = username;
-	this->password = password;
+	this->passwordSalt = generateSalt();
+	this->passwordHash = hashPassword(password, this->passwordSalt);
 	this->role = role;
 	this->loggedIn = false;
 	this->warnings = 0;
@@ -11,8 +12,8 @@ User::User(std::string name, std::string username, std::string password, Role ro
 }
 
 bool User::login(std::string username, std::string password) {
-	// TODO: store a hashed password instead of the plain text password
-	if (username == this->username && password == this->password) {
+	// Hash what was typed with the user's salt and compare the hashes
+	if (username == this->username && hashPassword(password, this->passwordSalt) == this->passwordHash) {
 		this->loggedIn = true;
 	} else {
 		this->loggedIn = false;
@@ -31,6 +32,13 @@ std::string User::getName() const {
 
 std::string User::getUsername() const {
 	return this->username;
+}
+std::string User::getPasswordSalt() const {
+	return this->passwordSalt;
+}
+
+std::string User::getPasswordHash() const {
+	return this->passwordHash;
 }
 
 Role User::getRole() const {
