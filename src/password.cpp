@@ -1,5 +1,7 @@
 #include <array>
+#include <cctype>
 #include <cstdint>
+#include <fstream>
 #include <iomanip>
 #include <random>
 #include <sstream>
@@ -32,6 +34,15 @@ std::string toHex(const std::vector<std::uint8_t>& bytes) {
     for (std::uint8_t byte : bytes)
         out << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte);
     return out.str();
+}
+
+bool hasWhitespace(const std::string& text) {
+    for (char c : text) {
+        if (std::isspace(static_cast<unsigned char>(c)))
+            return true;
+    }
+
+    return false;
 }
 
 }
@@ -120,4 +131,80 @@ std::string generateSalt() {
 
 std::string hashPassword(const std::string& password, const std::string& salt) {
     return sha256(salt + password);
+}
+
+// --------- PasswordFile ---------
+
+PasswordFile::PasswordFile(std::string filePath) {
+    this->filePath = filePath;
+}
+
+std::string PasswordFile::getFilePath() const {
+    return this->filePath;
+}
+
+bool PasswordFile::findEntry(std::string username, std::string& salt, std::string& hash) const {
+    std::ifstream in(filePath);
+    std::string line;
+
+    while (std::getline(in, line)) {
+        std::istringstream fields(line);
+        std::string savedUsername, savedSalt, savedHash;
+
+        if (fields >> savedUsername >> savedSalt >> savedHash && savedUsername == username) {
+            salt = savedSalt;
+            hash = savedHash;
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool PasswordFile::save(std::string username, std::string salt, std::string hash) {
+    if (username.empty() || salt.empty() || hash.empty())
+        return false;
+
+    // Spaces seperate the fields on each line, so none area allowed inside them
+    if (hasWhitespace(username) || hasWhitespace(salt) || hasWhitespace(hash))
+        return false;
+    
+    // Keep every other user's line, dropping this user's old line if there is one
+    std::vector<std::string> lines;
+    std::ifstream in(filePath);
+    std::string line;
+
+    while (std::getline(in, line)) {
+        std::istringstream fields(line);
+        std::string savedUsername;
+        fields >> savedUsername;
+
+        if (!savedUsername.empty() && savedUsername != username)
+            lines.push_back(line);
+    }
+    in.close();
+
+    lines.push_back(username + " " + salt + " " + hash);
+
+    std::ofstream out(filePath, std::ios::trunc);
+    if (!out)
+        return false;
+
+    for (const std::string& saved : lines)
+        out << saved << "\n";
+
+    return true;
+}
+
+bool PasswordFile::contains(std::string username) const {
+    std::string salt, hash;
+    return findEntry(username, salt, hash);
+}
+
+bool PasswordFile::verify(std::string username, std::string password) const {
+    std::string salt, hash;
+    if (!findEntry(username, salt, hash))
+        return false;
+
+    return hashPassword(password, salt) == hash;
 }

@@ -22,6 +22,20 @@ bool User::login(std::string username, std::string password) {
 	return this->loggedIn;
 }
 
+bool User::login(const PasswordFile& file, std::string username, std::string password) {
+	if (username == this->username && file.verify(username, password)) {
+		this->loggedIn = true;
+	} else {
+		this->loggedIn = false;
+	}
+
+	return this->loggedIn;
+}
+
+bool User::saveCredentials(PasswordFile& file) const {
+	return file.save(this->username, this->passwordSalt, this->passwordHash);
+}
+
 void User::logout() {
 	this->loggedIn = false;
 }
@@ -33,6 +47,7 @@ std::string User::getName() const {
 std::string User::getUsername() const {
 	return this->username;
 }
+
 std::string User::getPasswordSalt() const {
 	return this->passwordSalt;
 }

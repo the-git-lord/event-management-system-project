@@ -62,6 +62,12 @@ public:
     virtual ~User() = default;
 
     bool login(std::string username, std::string password);
+
+    // Log in by checking the password against the hash saved in a password file
+    bool login(const PasswordFile& file, std::string username, std::string password);
+
+    // Save this user's username, salt and hash to a password file
+    bool saveCredentials(PasswordFile& file) const;
     void logout();
 
     std::string getName() const;
