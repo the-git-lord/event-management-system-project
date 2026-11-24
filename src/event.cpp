@@ -93,8 +93,8 @@ void Event::setDay(struct tm *time, int day) {
 }
 
 void Event::setMonth(struct tm *time, int month) {
-	if (month >= 1 && month <= 12)
-		time->tm_mon = month;	
+    if (month >= 1 && month <= 12)
+        time->tm_mon = month - 1;
 }
 
 void Event::setYear(struct tm *time, int year) {
@@ -194,7 +194,7 @@ double Event::getDurationDays() {
 	}
 
 	double seconds = difftime(mktime(getEndTime()), mktime(getStartTime()));
-	this->duration = seconds / 60 / 60 / 365;
+	this->duration = seconds / 60.0 / 60.0 / 24.0;
 
 	return this->duration;
 }
