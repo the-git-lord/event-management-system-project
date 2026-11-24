@@ -41,6 +41,9 @@ RegisterCode Event::addParticipant(User user) {
 	if (user.isBanned()) {
 		return RegisterCode::REJECTED_BANNED;
 	}
+	if (isEnrolled(user.getUsername())) {
+    return RegisterCode::REJECTED_ALREADY_ENROLLED;
+	}
 
     if (getEnrolledSize() >= capacity) {
 		Waitlist::addParticipant(user);
