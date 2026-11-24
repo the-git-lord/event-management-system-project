@@ -42,6 +42,21 @@ TEST(TestEventUserRegistration, Event_Enrolled_User_Count_Match) {
 	ASSERT_EQ(event.getEnrolledSize(), enrolled);
 }
 
+TEST(TestEventUserRegistration, Duplicate_Registration) {
+    Event event = createValidEvent();
+    Participant user("Aditi", "aditi001", "1234");
+
+    // Register the participant for the first time.
+    ASSERT_EQ(event.addParticipant(user), RegisterCode::ADDED_TO_EVENT);
+
+    // Registering the same participant again should be rejected.
+    ASSERT_EQ(event.addParticipant(user),
+              RegisterCode::REJECTED_ALREADY_ENROLLED);
+
+    // The participant should only occupy one seat.
+    ASSERT_EQ(event.getEnrolledSize(), 1u);
+    ASSERT_TRUE(event.isEnrolled("aditi001"));
+}
 int main(int argc, char **argv) {
 	testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
