@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "report.hpp"
+
 enum class Role {
     PARTICIPANT,
     ADMINISTRATOR
@@ -69,6 +71,10 @@ public:
 
     int getWarningCount() const;
     bool isBanned() const;
+
+    // File a report about another user. Must be logged in.
+    bool reportUser(ReportBoard& board, const User& reportedUser, ReportReason reason, std::string details = "");
+    
 };
 
 

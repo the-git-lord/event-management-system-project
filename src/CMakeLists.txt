@@ -38,6 +38,10 @@ target_include_directories(Admin
 )
 
 add_library(User user.cpp)
+target_link_libraries(User
+  PUBLIC
+  Report
+)
 target_include_directories(User
   PUBLIC
   ${PROJECT_SOURCE_DIR}/headers
