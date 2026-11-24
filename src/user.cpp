@@ -53,6 +53,16 @@ bool User::isBanned() const {
 	return this->banned;
 }
 
+bool User::reportUser(ReportBoard& board, const User& reportedUser, ReportReason reason, std::string details) {
+
+	if (!this->loggedIn) {
+		return false;
+	}
+
+	int id = board.fileReport(this->username, reportedUser.getUsername(), reason, details);
+	return id != -1;
+}
+
 Participant::Participant(std::string name, std::string username, std::string password)
 	: User(name, username, password, Role::PARTICIPANT) {}
 void Participant::setWorkshopType(WorkshopParticipantType type) {

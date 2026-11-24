@@ -138,3 +138,10 @@ bool Administrator::dismissReport(Report& report) {
     report.dismiss();
     return true;
 }
+
+std::vector<Report*> Administrator::viewOpenReports(ReportBoard& board) {
+    if (!hasAdminPrivileges())
+        return {};
+
+    return board.getOpenReports();
+}

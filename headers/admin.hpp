@@ -29,6 +29,9 @@ public:
     // event is only needed for REMOVED_FROM_EVENT.
     bool handleReport(Report& report, User& reportedUser, ReportAction action, Event* event = nullptr);
     bool dismissReport(Report& report);
+
+    // Empty if the admin is not logged in
+    std::vector<Report*> viewOpenReports(ReportBoard& board);
 };
 
 #endif
