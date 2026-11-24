@@ -5,11 +5,11 @@ std::string reportReasonToString(ReportReason reason) {
         case ReportReason::HARASSMENT:
             return "Harassment";
         case ReportReason::SAFETY_CONCERN:
-            return "Safety Concern";
+            return "Safety concern";
         case ReportReason::SPAM:
             return "Spam";
         case ReportReason::INAPPROPRIATE_BEHAVIOR:
-            return "Inappropriate Behavior";
+            return "Inappropriate behavior";
         case ReportReason::OTHER:
             return "Other";
     }
