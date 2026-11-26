@@ -19,4 +19,5 @@ public:
     bool hasParticipants() const;
     User getNextParticipant() const;
     int getSize() const;
+    bool isFull() const;
 };

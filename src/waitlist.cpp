@@ -6,7 +6,7 @@ Waitlist::Waitlist() {
 }
 
 bool Waitlist::addParticipant(const User name) {
-    if (getSize() >= waitlistCapacity) {
+    if (isFull()) {
         return false;
     }
 
@@ -15,7 +15,7 @@ bool Waitlist::addParticipant(const User name) {
 }
 
 bool Waitlist::addPriorityParticipant(const User name) {
-    if (getSize() >= waitlistCapacity) {
+    if (isFull()) {
         return false;
     }
 
@@ -64,4 +64,8 @@ User Waitlist::getNextParticipant() const {
 
 int Waitlist::getSize() const {
     return participants.size() + priorityParticipants.size();
+}
+
+bool Waitlist::isFull() const {
+    return getSize() >= waitlistCapacity;
 }
